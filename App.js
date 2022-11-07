@@ -1,27 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { VStack, HStack, Box, Button, Flex, AppBar } from "@react-native-material/core";
+import { Provider as PaperProvider } from 'react-native-paper';
+import { Button } from 'react-native-paper';
+import AppBar from './Components/AppBar';
 
 export default function App() {
   return (
 
+
     <View style={styles.container}>
-      <AppBar title="O'Hare International Airport (ORD)" marginBottom={20} />
-      <VStack alignItems="center" spacing={20}>
-        <HStack spacing={10}>
-          <Button title="Schedule" />
-          <Button title="Airport Information"> </Button>
-        </HStack>
-        <VStack spacing={50}>
-          <Button title="Amenity Finder" />
-          <Button title="Find a Flight" />
-          <Button title="Your Flight Information" />
+      <AppBar />
 
-        </VStack>
+      <View style={styles.hStack}>
+        <Button mode="contained" style={{ flex: 1 }}>Schedule</Button>
+        <Button mode="contained" style={{ flex: 1 }}>Airport Information</Button>
 
+      </View>
 
-
-      </VStack>
 
     </View>
 
@@ -29,11 +24,20 @@ export default function App() {
   );
 }
 
+// TODO later: MOVE THIS STYLESHEET TO STYLES.JS (AND EXPORT)
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
-
-    justifyContent: "flex-start",
-
+    backgroundColor: '#212121',
+    flex: 1// makes component take up all available space (https://reactnative.dev/docs/flexbox)
   },
+
+  hStack: {
+    flexDirection: "row",
+  },
+
+  primaryButton: {
+    color: '#0277bd'
+  }
 });
+
+
