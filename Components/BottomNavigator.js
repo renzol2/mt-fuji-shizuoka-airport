@@ -7,12 +7,13 @@ const SearchRoute = () => <Text>Search</Text>;
 
 const PinsRoute = () => <Text>Pins</Text>;
 
+// See: https://callstack.github.io/react-native-paper/bottom-navigation.html
 const BottomNavigator = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'home', title: 'Home', icon: 'home' },
-    { key: 'search', title: 'Search', icon: 'magnify' },
-    { key: 'pins', title: 'Pins', icon: 'pin' },
+    { key: 'home', title: 'Home', focusedIcon: 'home' },
+    { key: 'search', title: 'Search', focusedIcon: 'magnify' },
+    { key: 'pins', title: 'Pins', focusedIcon: 'pin' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({

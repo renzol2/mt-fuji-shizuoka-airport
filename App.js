@@ -4,6 +4,9 @@ import { Button } from 'react-native-paper';
 import AppBar from './Components/AppBar';
 import BottomNavigator from './Components/BottomNavigator';
 
+/**
+ * Home screen
+ */
 export default function App() {
   return (
     <View style={styles.container}>
@@ -22,6 +25,7 @@ export default function App() {
       <View style={styles.vStack}>
         <Button
           mode="contained"
+          icon="door-sliding"
           style={styles.vStackItem}
           labelStyle={styles.buttonText}
         >
@@ -29,6 +33,7 @@ export default function App() {
         </Button>
         <Button
           mode="contained"
+          icon="format-list-bulleted"
           style={styles.vStackItem}
           labelStyle={styles.buttonText}
         >
@@ -36,7 +41,7 @@ export default function App() {
         </Button>
         <Button
           mode="contained"
-          icon="camera"
+          icon="airplane"
           style={styles.vStackItem}
           labelStyle={{ fontSize: 19 }}
         >
@@ -80,9 +85,5 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 20,
-  },
-
-  primaryButton: {
-    color: '#0277bd',
   },
 });
