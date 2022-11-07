@@ -28,7 +28,7 @@ export default function HomeScreen() {
           style={styles.vStackItem}
           labelStyle={styles.buttonText}
         >
-          Gate
+          Gate Amenity Finder
         </Button>
         <Button
           mode="contained"
@@ -42,7 +42,7 @@ export default function HomeScreen() {
           mode="contained"
           icon="airplane"
           style={styles.vStackItem}
-          labelStyle={{ fontSize: 19 }}
+
         >
           Your Flight Information
         </Button>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 400,
     justifyContent: 'space-evenly',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   hStackItem: {
