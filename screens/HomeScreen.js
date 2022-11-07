@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import AppBar from '../components/AppBar';
+import AppBar from '../Components/AppBar';
 
 /**
  * Home screen

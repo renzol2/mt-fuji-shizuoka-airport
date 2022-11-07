@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import PinsScreen from '../screens/PinsScreen';
-import SearchScreen from '../screens/SearchScreen';
+import HomeScreen from '../Screens/HomeScreen';
+import PinsScreen from '../Screens/PinsScreen';
+import SearchScreen from '../Screens/SearchScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createMaterialBottomTabNavigator();
