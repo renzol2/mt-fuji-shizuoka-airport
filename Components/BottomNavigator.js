@@ -3,15 +3,17 @@ import HomeScreen from '../Screens/HomeScreen';
 import PinsScreen from '../Screens/PinsScreen';
 import SearchScreen from '../Screens/SearchScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useState } from 'react';
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavigator() {
+  const [pinnedFlight, setPinnedFlight] = useState(undefined);
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        children={() => <HomeScreen pinnedFlight={pinnedFlight} />}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
@@ -31,7 +33,9 @@ export default function BottomNavigator() {
       />
       <Tab.Screen
         name="Pins"
-        component={PinsScreen}
+        children={() => (
+          <PinsScreen pinnedFlight={pinnedFlight} setPinnedFlight={setPinnedFlight} />
+        )}
         options={{
           tabBarLabel: 'Pins',
           tabBarIcon: ({ color }) => (

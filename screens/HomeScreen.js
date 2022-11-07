@@ -6,7 +6,7 @@ import AppBar from '../Components/AppBar';
 /**
  * Home screen
  */
-export default function HomeScreen() {
+export default function HomeScreen({ pinnedFlight }) {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -38,16 +38,16 @@ export default function HomeScreen() {
         >
           Flight Search
         </Button>
-        <Button
-          mode="contained"
-          icon="airplane"
-          style={styles.vStackItem}
-
-        >
+        <Button mode="contained" icon="airplane" style={styles.vStackItem}>
           Your Flight Information
         </Button>
+        {pinnedFlight !== undefined && (
+          <>
+            <Text style={{ color: 'white' }}>{pinnedFlight.name}</Text>
+            <Text style={{ color: 'white' }}>{pinnedFlight.time}</Text>
+          </>
+        )}
       </View>
-      {/* <BottomNavigator /> */}
     </View>
   );
 }
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 400,
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   hStackItem: {
