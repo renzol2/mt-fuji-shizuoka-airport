@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { Button } from 'react-native-paper';
+import { Button, BottomNavigation } from 'react-native-paper';
 import AppBar from './Components/AppBar';
 
 export default function App() {
@@ -12,15 +12,17 @@ export default function App() {
       <AppBar />
 
       <View style={styles.hStack}>
-        <Button mode="contained" style={{ flex: 1 }}>Schedule</Button>
-        <Button mode="contained" style={{ flex: 1 }}>Airport Information</Button>
-
+        <Button mode="contained" style={styles.hStackItem}>Schedule</Button>
+        <Button mode="contained" style={styles.hStackItem}>Airport Information</Button>
       </View>
 
+      <View style={styles.vStack}>
+        <Button mode="contained" style={styles.vStackItem} labelStyle={styles.buttonText}>Gate</Button>
+        <Button mode="contained" style={styles.vStackItem} labelStyle={styles.buttonText}>Flight Search</Button>
+        <Button mode="contained" icon="camera" style={styles.vStackItem} labelStyle={{ fontSize: 19 }}>Your Flight Information</Button>
 
+      </View>
     </View>
-
-
   );
 }
 
@@ -33,6 +35,34 @@ const styles = StyleSheet.create({
 
   hStack: {
     flexDirection: "row",
+    marginBottom: 30,
+    justifyContent: "space-evenly",
+    marginTop: 50
+
+  },
+
+  vStack: {
+    flexDirection: "column",
+    height: 400,
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  },
+
+
+  hStackItem: {
+    width: 200,
+  },
+
+
+  vStackItem: {
+    width: 300,
+    padding: 10,
+
+  },
+
+  buttonText: {
+    fontSize: 20
+
   },
 
   primaryButton: {
