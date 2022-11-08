@@ -11,7 +11,14 @@ export default function PinsScreen({ pinnedFlight, setPinnedFlight }) {
         size={50}
         onPress={() => {
           if (pinnedFlight === undefined) {
-            setPinnedFlight({ name: 'Pinned flight', time: '12:00 am' });
+            setPinnedFlight({
+              number: "Q1776",
+              departure: "Chicago O'Hare",
+              arrival: "Doha International",
+              time: "13:00",
+              airline: "Qatar Airlines",
+              gate: "C6"
+            });
           } else {
             setPinnedFlight(undefined);
           }
