@@ -1,7 +1,9 @@
-flight_structure = {
+export const flight_structure = {
     number: "",
     departure: "",
     arrival: "",
     time: "",
-    airline: ""
+    airline: "",
+    gate: ""
 }
+
