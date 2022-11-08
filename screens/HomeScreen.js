@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button, Card, Title, Paragraph, Surface } from 'react-native-paper';
+import { Button, Card, Title, Paragraph, Surface, Colors } from 'react-native-paper';
 import AppBar from '../Components/AppBar';
 import { colorScheme } from '../Styles';
 
@@ -70,7 +70,7 @@ export default function HomeScreen({ pinnedFlight }) {
 // TODO later: MOVE THIS STYLESHEET TO STYLES.JS (AND EXPORT)
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#212121',
+    backgroundColor: colorScheme.backgroundPage,
     flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
   },
 
