@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Card, Title, Paragraph, Surface } from 'react-native-paper';
 import AppBar from '../Components/AppBar';
+import { colorScheme } from '../Styles';
 
 /**
  * Home screen
  */
-export default function HomeScreen() {
+export default function HomeScreen({ pinnedFlight }) {
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -38,17 +39,31 @@ export default function HomeScreen() {
         >
           Flight Search
         </Button>
-        <Button
-          mode="contained"
-          icon="airplane"
-          style={styles.vStackItem}
-
-        >
+        <Button mode="contained" icon="airplane" style={styles.vStackItem}>
           Your Flight Information
         </Button>
       </View>
-      {/* <BottomNavigator /> */}
-    </View>
+
+      {/* MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITARIONS IN A CARD */}
+      <Card style={styles.card}>
+        <Card.Title style={{ fontSize: 30 }} title="Your Flight Information" />
+        <Card.Content>
+          {pinnedFlight !== undefined ? (
+            <>
+              <Text style={styles.cardBodyRight}>Gate: {pinnedFlight.gate}</Text>
+              <Text style={styles.cardBody}>Time: {pinnedFlight.time} </Text>
+              <Text style={styles.cardBody}>Departure: {pinnedFlight.departure}</Text>
+              <Text style={styles.cardBody}>Arrival: {pinnedFlight.arrival}</Text>
+
+            </>
+          ) : (
+            <Text style={styles.cardBody}>Pin a Flight to see it here!</Text>
+          )}
+
+        </Card.Content>
+      </Card>
+
+    </View >
   );
 }
 
@@ -70,19 +85,33 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 400,
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   hStackItem: {
     width: 150,
+    backgroundColor: colorScheme.primary
   },
 
   vStackItem: {
     width: 300,
     padding: 10,
+    backgroundColor: colorScheme.primary
   },
 
   buttonText: {
     fontSize: 20,
   },
+  card: {
+    backgroundColor: colorScheme.light
+
+  },
+  cardBody: {
+    fontSize: 20
+  },
+  cardBodyRight: {
+    alignContent: "flex-end",
+    fontSize: 25
+  }
+
 });
