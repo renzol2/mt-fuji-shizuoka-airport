@@ -3,6 +3,5 @@ export const colorScheme = {
     dark: "#002984",
     light: "#757de8",
     secondary: "#b39ddb",
-    backgroundPage: "#212121"
-
-}
+    backgroundPage: "#212121",
+};
