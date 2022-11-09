@@ -21,18 +21,7 @@ function HomeScreen({ pinnedFlight }) {
             <AppBar />
             <ScrollView>
                 <View style={styles.hStack}>
-                    <Button
-                        mode="contained"
-                        style={styles.hStackItem}
-                    >
-                        Schedule
-                    </Button>
-                    <Button
-                        mode="contained"
-                        style={styles.hStackItem}
-                    >
-                        Airport Info
-                    </Button>
+                    {/* Empty View to move objects down the screen */}
                 </View>
 
                 <View style={styles.vStack}>
@@ -41,9 +30,18 @@ function HomeScreen({ pinnedFlight }) {
                         icon="door-sliding"
                         style={styles.vStackItem}
                         labelStyle={styles.buttonText}
+                        onPress={() => navigation.navigate("")}
+                    >
+                        Flight Schedule
+                    </Button>
+                    <Button
+                        mode="contained"
+                        icon="door-sliding"
+                        style={styles.vStackItem} // CHANGE THIS TO BATHROOM ICON
+                        labelStyle={styles.buttonText}
                         onPress={() => navigation.navigate("AmenityFinder")}
                     >
-                        Gate Amenity Finder
+                        Airport Amenities
                     </Button>
                     <Button
                         mode="contained"
@@ -52,13 +50,6 @@ function HomeScreen({ pinnedFlight }) {
                         labelStyle={styles.buttonText}
                     >
                         Flight Search
-                    </Button>
-                    <Button
-                        mode="contained"
-                        icon="airplane"
-                        style={styles.vStackItem}
-                    >
-                        Your Flight Information
                     </Button>
                 </View>
 
@@ -131,9 +122,9 @@ const styles = StyleSheet.create({
 
     hStack: {
         flexDirection: "row",
-        marginBottom: 30,
+        marginBottom: 50,
         justifyContent: "space-evenly",
-        marginTop: 50,
+        marginTop: 70
     },
 
     vStack: {
