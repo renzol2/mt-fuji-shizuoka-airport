@@ -4,11 +4,20 @@ export const flight_structure = {
     arrival: "",
     time: "",
     airline: "",
-    gate: ""
-}
+    gate: "",
+};
 
+/**
+ * @typedef Flight
+ * @property {string} number
+ * @property {string} departure
+ * @property {string} arrival
+ * @property {string} time
+ * @property {string} airline
+ * @property {string} gate
+ */
 
-// To avoid having to implement actual searching, it may be better to create lists of flights on certain days 
+// To avoid having to implement actual searching, it may be better to create lists of flights on certain days
 // and use conditionals to see if it should be displayed (map function)
 // should talk about this on Wednesday's meeting
 
@@ -19,7 +28,7 @@ export const flights = [
         arrival: "",
         time: "",
         airline: "",
-        gate: ""
+        gate: "",
     },
     {
         number: "",
@@ -27,7 +36,7 @@ export const flights = [
         arrival: "",
         time: "",
         airline: "",
-        gate: ""
+        gate: "",
     },
     {
         number: "",
@@ -35,10 +44,6 @@ export const flights = [
         arrival: "",
         time: "",
         airline: "",
-        gate: ""
-    }
-]
-
-
-
-
+        gate: "",
+    },
+];
