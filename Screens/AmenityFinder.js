@@ -14,6 +14,9 @@ export default function AmenityFinder() {
     return (
         <View style={{ backgroundColor: colorScheme.backgroundPage, flex: 1 }}>
             <Appbar />
+            <Text style={{ color: 'white' }}>Choose your amenity type</Text>
+            <Text style={{ color: 'white' }}>Food</Text>
+            <Text style={{ color: 'white' }}>Bathrooms</Text>
         </View>
     );
 }
