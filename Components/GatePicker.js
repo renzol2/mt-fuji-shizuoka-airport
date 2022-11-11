@@ -1,8 +1,7 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
-import { Button, Menu, Divider, Provider } from "react-native-paper";
-import { colorScheme } from "../Styles";
-import { gates } from "../data/amenities";
+import { View } from "react-native";
+import { Button, Menu, Provider } from "react-native-paper";
+import { GATES } from "../data/amenities";
 
 const GatePicker = () => {
     const [visible, setVisible] = React.useState(false);
@@ -26,7 +25,7 @@ const GatePicker = () => {
                     onDismiss={closeMenu}
                     anchor={<Button onPress={openMenu}>{name}</Button>}
                 >
-                    {gates.map((gate) => {
+                    {GATES.map((gate) => {
                         return (
                             <Menu.Item
                                 onPress={() => {

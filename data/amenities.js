@@ -1,7 +1,6 @@
-const gates = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9"];
+const GATES = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9"];
 
-
-const restaurants = {
+const RESTAURANTS = {
     B: {
         B1: { 1: { name: "Goose Island Beer Company", hours: "6am-9pm" } },
         B2: {},
@@ -16,4 +15,4 @@ const restaurants = {
 };
 
 // ATTEMPTING TO USE THESE EXPORTS IN ANOTHER FILE CAUSES AN EXPORT NOT DEFINED ERROR
-export { gates, restaurants }
+export { GATES, RESTAURANTS };
