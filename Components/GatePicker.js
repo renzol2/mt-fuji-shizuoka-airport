@@ -29,8 +29,12 @@ const GatePicker = () => {
                     {gates.map((gate) => {
                         return (
                             <Menu.Item
-                                onPress={() => setName("Selected: " + gate)}
+                                onPress={() => {
+                                    setName("Selected: " + gate);
+                                    closeMenu();
+                                }}
                                 title={gate}
+                                key={gate}
                             />
                         );
                     })}
