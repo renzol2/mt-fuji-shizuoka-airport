@@ -1,11 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { View } from "react-native";
 import { Button, Menu, Provider } from "react-native-paper";
 import { GATES } from "../data/amenities";
 
 const GatePicker = () => {
+    const UNSELECTED_GATE_NAME = 'Select a Gate!';
     const [visible, setVisible] = React.useState(false);
-    const [name, setName] = React.useState("Select a Gate!");
+    const [gateName, setGateName] = React.useState(UNSELECTED_GATE_NAME);
+    const navigation = useNavigation();
 
     const openMenu = () => setVisible(true);
 
@@ -23,13 +26,13 @@ const GatePicker = () => {
                 <Menu
                     visible={visible}
                     onDismiss={closeMenu}
-                    anchor={<Button onPress={openMenu}>{name}</Button>}
+                    anchor={<Button onPress={openMenu}>{gateName}</Button>}
                 >
                     {GATES.map((gate) => {
                         return (
                             <Menu.Item
                                 onPress={() => {
-                                    setName("Selected: " + gate);
+                                    setGateName("Selected: " + gate);
                                     closeMenu();
                                 }}
                                 title={gate}
@@ -38,6 +41,17 @@ const GatePicker = () => {
                         );
                     })}
                 </Menu>
+                <Button
+                    mode="contained"
+                    onPress={() => {
+                        navigation.navigate("AmenityResults", {
+                            gateName: gateName,
+                        });
+                    }}
+                    disabled={gateName === UNSELECTED_GATE_NAME}
+                >
+                    Find amenities
+                </Button>
             </View>
         </Provider>
     );
