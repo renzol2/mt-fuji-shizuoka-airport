@@ -5,7 +5,7 @@ import { Button, Menu, Provider } from "react-native-paper";
 import { GATES } from "../data/amenities";
 
 const GatePicker = () => {
-    const UNSELECTED_GATE_NAME = 'Select a Gate!';
+    const UNSELECTED_GATE_NAME = "Select a Gate!";
     const [visible, setVisible] = React.useState(false);
     const [gateName, setGateName] = React.useState(UNSELECTED_GATE_NAME);
     const navigation = useNavigation();
