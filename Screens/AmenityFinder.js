@@ -23,10 +23,8 @@ export default function AmenityFinder() {
             <AppBar />
             <GatePicker />
         </SafeAreaView>
-
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 50,
         justifyContent: "space-evenly",
-        marginTop: 70
+        marginTop: 70,
     },
 
     vStack: {
