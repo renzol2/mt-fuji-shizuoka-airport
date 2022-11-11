@@ -6,6 +6,7 @@ import { Button, Card } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
 import AmenityFinder from "./AmenityFinder";
+import AmenityResults from "./AmenityResults";
 
 const Stack = createNativeStackNavigator();
 
@@ -104,6 +105,13 @@ export default function Home({ pinnedFlight }) {
             <Stack.Screen
                 name="AmenityFinder"
                 component={AmenityFinder}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="AmenityResults"
+                component={AmenityResults}
                 options={{
                     headerShown: false,
                 }}
