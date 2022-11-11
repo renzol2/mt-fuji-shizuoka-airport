@@ -4,9 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Card } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import { flights } from "../data/flight";
 import { colorScheme } from "../Styles";
 import AmenityFinder from "./AmenityFinder";
 import AmenityResults from "./AmenityResults";
+import FlightSearch from "./FlightSearch";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +51,7 @@ function HomeScreen({ pinnedFlight }) {
                         icon="format-list-bulleted"
                         style={styles.vStackItem}
                         labelStyle={styles.buttonText}
+                        onPress={() => navigation.navigate("FlightSearch")}
                     >
                         Flight Search
                     </Button>
@@ -112,6 +115,13 @@ export default function Home({ pinnedFlight }) {
             <Stack.Screen
                 name="AmenityResults"
                 component={AmenityResults}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FlightSearch"
+                component={FlightSearch}
                 options={{
                     headerShown: false,
                 }}
