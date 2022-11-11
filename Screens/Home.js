@@ -105,8 +105,7 @@ export default function Home({ pinnedFlight }) {
                 name="AmenityFinder"
                 component={AmenityFinder}
                 options={{
-                    headerTitle: "Gate Amenity Finder",
-                    headerShown: true,
+                    headerShown: false,
                 }}
             />
         </Stack.Navigator>
