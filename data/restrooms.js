@@ -1,4 +1,4 @@
-const RESTROOMS = {
+export const RESTROOMS = {
     B1: { "baby_station": true },
     B2: {},
     B3: {},
