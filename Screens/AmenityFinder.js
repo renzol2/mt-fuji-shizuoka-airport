@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
@@ -26,6 +26,14 @@ export default function AmenityFinder() {
                 gateName={gateName}
                 setGateName={setGateName}
             />
+
+
+            <Button style={styles.vStackItem} mode="contained">Dining</Button>
+            <Button style={styles.vStackItem} mode="contained">Restrooms</Button>
+            <Button style={styles.vStackItem} mode="contained">Medical</Button>
+            <Button style={styles.vStackItem} mode="contained">Lounges</Button>
+
+
             <Button
                 mode="contained"
                 onPress={() => {
@@ -45,5 +53,24 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
+    },
+    hStack: {
+        flexDirection: "row",
+        marginBottom: 50,
+        justifyContent: "space-evenly",
+        marginTop: 70
+    },
+
+    vStack: {
+        flexDirection: "column",
+        height: 200,
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flex: 1
+    },
+    vStackItem: {
+
+        marginTop: 20,
+        backgroundColor: colorScheme.primary,
     },
 });
