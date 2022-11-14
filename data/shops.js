@@ -138,14 +138,26 @@ const DUTY_FREE_STORE = {
     ],
 };
 
-export const SHOPS = {
-    B1: {},
-    B2: {},
-    B3: {},
-    B4: {},
-    B5: {},
+
+/**
+ * @typedef Shops
+ * @type {Object.<string, Array<Shop>}
+ * 
+ */
+
+
+/** @type {Shops} */
+const SHOPS = {
+    B1: [],
+    B2: [],
+    B3: [],
+    B4: [],
+    B5: [],
     B6: [HOYPOLOI, JOHNSTON_AND_MURPHY, VOSGES_HAUT_CHOCOLAT],
     B7: [INMOTION],
     B8: [FIELD_MUSEUM, OAKLEY],
     B9: [CNN_NEWSTAND_CHICAGO, DUTY_FREE_STORE],
 };
+
+
+export { SHOPS };

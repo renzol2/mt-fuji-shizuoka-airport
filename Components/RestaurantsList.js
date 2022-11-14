@@ -52,6 +52,15 @@ function RestaurantsList({ gate }) {
                                     console.log("Pin this restaurant!")
                                 }
                             />
+                            <IconButton
+                                style={styles.pinButton}
+                                icon="car"
+                                iconColor={Colors.purple100}
+                                size={20}
+                                onPress={() =>
+                                    console.log("yay crowdsouricng!")
+                                }
+                            />
                         </Surface>
                     );
                 })}
