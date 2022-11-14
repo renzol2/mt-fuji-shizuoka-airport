@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View } from "react-native";
 import { Button, Menu, Provider } from "react-native-paper";
-import { GATES } from "../data/restaurants";
+import { GATES } from "../data/gates";
 
 /**
  * Paper menu that allows user to select a gate

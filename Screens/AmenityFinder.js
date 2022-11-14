@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { AMENITY_TYPES } from "../data/amenityTypes";
+import { UNSELECTED_GATE_NAME } from "../data/gates";
 
 /**
  * The Amenity Finder screen allows the user to select a gate
@@ -15,12 +16,11 @@ import { AMENITY_TYPES } from "../data/amenityTypes";
  * them to the AmenityResults screen with the chosen filters.
  */
 export default function AmenityFinder() {
-    const UNSELECTED_GATE_NAME = "Select a Gate!";
     const [gateName, setGateName] = React.useState(UNSELECTED_GATE_NAME);
-    const [amenityType, setAmenityType] = React.useState(AMENITY_TYPES.ANY);
     const navigation = useNavigation();
 
-    // These objects are mapped to buttons
+    // These objects are mapped to buttons.
+    // We can add another object to the array to add more amenity types
     const AMENITY_TYPE_BUTTONS = [
         { type: AMENITY_TYPES.DINING, buttonTitle: "Dining" },
         { type: AMENITY_TYPES.LOUNGES, buttonTitle: "Lounges" },
@@ -33,27 +33,25 @@ export default function AmenityFinder() {
         <SafeAreaView style={styles.container}>
             <StatusBar />
             <AppBar />
+
+            {/* Gate picker component */}
             <GatePicker
                 gateName={gateName}
                 setGateName={setGateName}
                 isUnselected={gateName === UNSELECTED_GATE_NAME}
             />
 
+            {/* List of all amenity type buttons */}
             <View style={styles.amenityTypeButtonContainer}>
                 {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle }) => (
                     <Button
-                        style={
-                            amenityType === type
-                                ? styles.selectedAmenityButton
-                                : styles.amenityTypeButton
-                        }
+                        style={styles.amenityTypeButton}
                         mode="contained"
                         onPress={() => {
-                            if (amenityType !== type) {
-                                setAmenityType(type);
-                            } else {
-                                setAmenityType(AMENITY_TYPES.ANY);
-                            }
+                            navigation.navigate("AmenityResults", {
+                                gateName: gateName,
+                                amenityType: type,
+                            });
                         }}
                         key={type}
                     >
@@ -61,22 +59,6 @@ export default function AmenityFinder() {
                     </Button>
                 ))}
             </View>
-
-            <Button
-                mode="contained"
-                onPress={() => {
-                    navigation.navigate("AmenityResults", {
-                        gateName: gateName,
-                        amenityType: amenityType,
-                    });
-                }}
-                disabled={gateName === UNSELECTED_GATE_NAME}
-                style={styles.findAmenitiesButton}
-            >
-                Find{" "}
-                {amenityType === AMENITY_TYPES.ANY ? "amenities" : amenityType}{" "}
-                {gateName === UNSELECTED_GATE_NAME ? "" : `at ${gateName}`}
-            </Button>
         </SafeAreaView>
     );
 }

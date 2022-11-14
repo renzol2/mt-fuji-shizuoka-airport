@@ -10,6 +10,7 @@ import LoungesList from "../Components/LoungesList";
 import MedicalAmenitiesList from "../Components/MedicalAmenitiesList";
 import RestroomsList from "../Components/RestroomsList";
 import ShopsList from "../Components/ShopsList";
+import { UNSELECTED_GATE_NAME } from "../data/gates";
 
 /**
  * Displays the search results for amenities. Takes a `gateName` and `amenityType`
@@ -35,10 +36,17 @@ export default function AmenityResults({ route }) {
             <StatusBar />
             <AppBar />
             <ScrollView>
-                <Text
-                    style={styles.header}
-                >{`Amenities at gate ${gateName}`}</Text>
+                {/* Header */}
+                <Text style={styles.header}>{`Amenities ${
+                    gateName === UNSELECTED_GATE_NAME
+                        ? ""
+                        : "at gate " + gateName
+                }`}</Text>
+
+                {/* Amenity type */}
                 <Text style={styles.amenityType}>{amenityType}</Text>
+
+                {/* List of amenity components */}
                 <AmenityList gate={gateName} />
             </ScrollView>
         </SafeAreaView>
