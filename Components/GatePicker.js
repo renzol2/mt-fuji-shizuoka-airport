@@ -1,9 +1,13 @@
 import * as React from "react";
 import { View } from "react-native";
 import { Button, Menu, Provider } from "react-native-paper";
-import { GATES } from "../data/restaurants";
+import { GATES } from "../data/gates";
 
-const GatePicker = ({ gateName, setGateName }) => {
+/**
+ * Paper menu that allows user to select a gate
+ * @param {{ gateName: string, setGateName: React.SetStateAction, isUnselected: boolean }}
+ */
+const GatePicker = ({ gateName, setGateName, isUnselected }) => {
     const [visible, setVisible] = React.useState(false);
 
     const openMenu = () => setVisible(true);
@@ -11,7 +15,6 @@ const GatePicker = ({ gateName, setGateName }) => {
     const closeMenu = () => setVisible(false);
 
     return (
-
         <View
             style={{
                 paddingTop: 50,
@@ -22,13 +25,20 @@ const GatePicker = ({ gateName, setGateName }) => {
             <Menu
                 visible={visible}
                 onDismiss={closeMenu}
-                anchor={<Button mode='contained' onPress={openMenu}>{gateName}</Button>}
+                anchor={
+                    <Button
+                        mode="contained"
+                        onPress={openMenu}
+                    >
+                        {isUnselected ? "Select a gate" : `Selected: ${gateName}`}
+                    </Button>
+                }
             >
                 {GATES.map((gate) => {
                     return (
                         <Menu.Item
                             onPress={() => {
-                                setGateName("Selected: " + gate);
+                                setGateName(gate);
                                 closeMenu();
                             }}
                             title={gate}
@@ -38,7 +48,6 @@ const GatePicker = ({ gateName, setGateName }) => {
                 })}
             </Menu>
         </View>
-
     );
 };
 

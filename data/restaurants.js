@@ -1,5 +1,3 @@
-const GATES = ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9"];
-
 /**
  * @typedef Hours
  * @property {string} day
@@ -152,6 +150,12 @@ const STARBUCKS_B = {
     priceRange: "$",
 };
 
+/**
+ * @typedef Restaurants
+ * @type {Object.<string, Array<Restaurant>}
+ */
+
+/** @type {Restaurants} */
 const RESTAURANTS = {
     B1: [GOOSE_ISLAND_RESTAURANT],
     B2: [GOOSE_ISLAND_RESTAURANT],
@@ -165,4 +169,4 @@ const RESTAURANTS = {
 };
 
 // ATTEMPTING TO USE THESE EXPORTS IN ANOTHER FILE CAUSES AN EXPORT NOT DEFINED ERROR
-export { GATES, RESTAURANTS };
+export { RESTAURANTS };

@@ -1,11 +1,11 @@
 export const RESTROOMS = {
-    B1: { "baby_station": true },
+    B1: { hasBabyStation: true },
     B2: {},
     B3: {},
-    B4: { "baby_station": false },
+    B4: { hasBabyStation: false },
     B5: {},
     B6: {},
-    B7: { "baby_station": true },
+    B7: { hasBabyStation: true },
     B8: {},
-    B9: { "baby_station": true },
-}
+    B9: { hasBabyStation: true },
+};

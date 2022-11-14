@@ -11,7 +11,7 @@
  * @property {Array<Hours>} hours
  */
 
-
+// FIXME: any reason this is unused? should we use it somewhere?
 /** @type {Shop} */
 const HUSON_NEWS_AND_GIFTS = {
     name: "Hudson News and Gifts",
@@ -23,9 +23,8 @@ const HUSON_NEWS_AND_GIFTS = {
         { day: "Friday", openingTime: "5:30am", closingTime: "8pm" },
         { day: "Saturday", openingTime: "5:30am", closingTime: "8pm" },
         { day: "Sunday", openingTime: "5:30am", closingTime: "8pm" },
-    ]
-}
-
+    ],
+};
 
 /** @type {Shop} */
 const HOYPOLOI = {
@@ -38,8 +37,8 @@ const HOYPOLOI = {
         { day: "Friday", openingTime: "6am", closingTime: "5pm" },
         { day: "Saturday", openingTime: "6am", closingTime: "5pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "5pm" },
-    ]
-}
+    ],
+};
 
 /**@type {Shop} */
 const JOHNSTON_AND_MURPHY = {
@@ -52,9 +51,8 @@ const JOHNSTON_AND_MURPHY = {
         { day: "Friday", openingTime: "6am", closingTime: "6pm" },
         { day: "Saturday", openingTime: "6am", closingTime: "6pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "6pm" },
-    ]
-}
-
+    ],
+};
 
 /**@type {Shop} */
 const VOSGES_HAUT_CHOCOLAT = {
@@ -68,9 +66,7 @@ const VOSGES_HAUT_CHOCOLAT = {
         { day: "Saturday", openingTime: "10am", closingTime: "5pm" },
         { day: "Sunday", openingTime: "10am", closingTime: "5pm" },
     ],
-
-}
-
+};
 
 /**@type {Shop} */
 const INMOTION = {
@@ -84,8 +80,7 @@ const INMOTION = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
-}
-
+};
 
 /** @type {Shop} */
 const FIELD_MUSEUM = {
@@ -98,9 +93,8 @@ const FIELD_MUSEUM = {
         { day: "Friday", openingTime: "8am", closingTime: "7pm" },
         { day: "Saturday", openingTime: "8am", closingTime: "7pm" },
         { day: "Sunday", openingTime: "8am", closingTime: "7pm" },
-    ]
-}
-
+    ],
+};
 
 /**@type {Shop} */
 const OAKLEY = {
@@ -114,8 +108,7 @@ const OAKLEY = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
-}
-
+};
 
 /**@type {Shop} */
 const CNN_NEWSTAND_CHICAGO = {
@@ -128,9 +121,8 @@ const CNN_NEWSTAND_CHICAGO = {
         { day: "Friday", openingTime: "6am", closingTime: "9pm" },
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
-    ]
-}
-
+    ],
+};
 
 /**@type {Shop} */
 const DUTY_FREE_STORE = {
@@ -143,11 +135,8 @@ const DUTY_FREE_STORE = {
         { day: "Friday", openingTime: "6am", closingTime: "9pm" },
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
-    ]
-}
-
-
-
+    ],
+};
 
 export const SHOPS = {
     B1: {},
@@ -158,5 +147,5 @@ export const SHOPS = {
     B6: [HOYPOLOI, JOHNSTON_AND_MURPHY, VOSGES_HAUT_CHOCOLAT],
     B7: [INMOTION],
     B8: [FIELD_MUSEUM, OAKLEY],
-    B9: [CNN_NEWSTAND_CHICAGO, DUTY_FREE_STORE]
-}
+    B9: [CNN_NEWSTAND_CHICAGO, DUTY_FREE_STORE],
+};
