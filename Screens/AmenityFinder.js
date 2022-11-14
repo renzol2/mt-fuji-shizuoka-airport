@@ -38,26 +38,28 @@ export default function AmenityFinder() {
                 isUnselected={gateName === UNSELECTED_GATE_NAME}
             />
 
-            {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle }) => (
-                <Button
-                    style={
-                        amenityType === type
-                            ? styles.selectedAmenityButton
-                            : styles.amenityTypeButton
-                    }
-                    mode="contained"
-                    onPress={() => {
-                        if (amenityType !== type) {
-                            setAmenityType(type);
-                        } else {
-                            setAmenityType(AMENITY_TYPES.ANY);
+            <View style={styles.amenityTypeButtonContainer}>
+                {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle }) => (
+                    <Button
+                        style={
+                            amenityType === type
+                                ? styles.selectedAmenityButton
+                                : styles.amenityTypeButton
                         }
-                    }}
-                    key={type}
-                >
-                    {buttonTitle}
-                </Button>
-            ))}
+                        mode="contained"
+                        onPress={() => {
+                            if (amenityType !== type) {
+                                setAmenityType(type);
+                            } else {
+                                setAmenityType(AMENITY_TYPES.ANY);
+                            }
+                        }}
+                        key={type}
+                    >
+                        {buttonTitle}
+                    </Button>
+                ))}
+            </View>
 
             <Button
                 mode="contained"
@@ -83,17 +85,24 @@ const styles = StyleSheet.create({
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
     },
 
+    amenityTypeButtonContainer: {
+        paddingHorizontal: 50,   
+    },
+
     amenityTypeButton: {
-        marginTop: 20,
+        marginTop: 25,
+        paddingVertical: 5,
         backgroundColor: colorScheme.primary,
     },
 
     selectedAmenityButton: {
-        marginTop: 20,
+        marginTop: 25,
+        paddingVertical: 5,
         backgroundColor: colorScheme.light,
     },
 
     findAmenitiesButton: {
-        marginTop: 20,
+        marginTop: 25,
+        paddingVertical: 5,
     },
 });
