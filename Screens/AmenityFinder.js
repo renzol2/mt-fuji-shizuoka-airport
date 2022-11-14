@@ -27,12 +27,30 @@ export default function AmenityFinder() {
                 setGateName={setGateName}
             />
 
-
-            <Button style={styles.vStackItem} mode="contained">Dining</Button>
-            <Button style={styles.vStackItem} mode="contained">Restrooms</Button>
-            <Button style={styles.vStackItem} mode="contained">Medical</Button>
-            <Button style={styles.vStackItem} mode="contained">Lounges</Button>
-
+            <Button
+                style={styles.vStackItem}
+                mode="contained"
+            >
+                Dining
+            </Button>
+            <Button
+                style={styles.vStackItem}
+                mode="contained"
+            >
+                Restrooms
+            </Button>
+            <Button
+                style={styles.vStackItem}
+                mode="contained"
+            >
+                Medical
+            </Button>
+            <Button
+                style={styles.vStackItem}
+                mode="contained"
+            >
+                Lounges
+            </Button>
 
             <Button
                 mode="contained"
@@ -58,7 +76,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 50,
         justifyContent: "space-evenly",
-        marginTop: 70
+        marginTop: 70,
     },
 
     vStack: {
@@ -66,10 +84,10 @@ const styles = StyleSheet.create({
         height: 200,
         justifyContent: "space-evenly",
         alignItems: "center",
-        flex: 1
+        flex: 1,
     },
-    vStackItem: {
 
+    vStackItem: {
         marginTop: 20,
         backgroundColor: colorScheme.primary,
     },
