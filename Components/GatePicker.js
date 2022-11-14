@@ -11,34 +11,34 @@ const GatePicker = ({ gateName, setGateName }) => {
     const closeMenu = () => setVisible(false);
 
     return (
-        <Provider>
-            <View
-                style={{
-                    paddingTop: 50,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}
+
+        <View
+            style={{
+                paddingTop: 50,
+                flexDirection: "row",
+                justifyContent: "center",
+            }}
+        >
+            <Menu
+                visible={visible}
+                onDismiss={closeMenu}
+                anchor={<Button mode='contained' onPress={openMenu}>{gateName}</Button>}
             >
-                <Menu
-                    visible={visible}
-                    onDismiss={closeMenu}
-                    anchor={<Button onPress={openMenu}>{gateName}</Button>}
-                >
-                    {GATES.map((gate) => {
-                        return (
-                            <Menu.Item
-                                onPress={() => {
-                                    setGateName("Selected: " + gate);
-                                    closeMenu();
-                                }}
-                                title={gate}
-                                key={gate}
-                            />
-                        );
-                    })}
-                </Menu>
-            </View>
-        </Provider>
+                {GATES.map((gate) => {
+                    return (
+                        <Menu.Item
+                            onPress={() => {
+                                setGateName("Selected: " + gate);
+                                closeMenu();
+                            }}
+                            title={gate}
+                            key={gate}
+                        />
+                    );
+                })}
+            </Menu>
+        </View>
+
     );
 };
 
