@@ -46,7 +46,13 @@ export default function AmenityFinder() {
                             : styles.amenityTypeButton
                     }
                     mode="contained"
-                    onPress={() => setAmenityType(type)}
+                    onPress={() => {
+                        if (amenityType !== type) {
+                            setAmenityType(type);
+                        } else {
+                            setAmenityType(AMENITY_TYPES.ANY);
+                        }
+                    }}
                     key={type}
                 >
                     {buttonTitle}
