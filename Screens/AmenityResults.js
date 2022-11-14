@@ -37,6 +37,10 @@ export default function AmenityResults({ route }) {
             <AppBar />
             <ScrollView>
                 {/* Header */}
+                {/* 
+                    Displays 'Amenities' when no gate is selected, and
+                    displays 'Amenities at gate ___' when some gate is selected
+                */}
                 <Text style={styles.header}>{`Amenities ${
                     gateName === UNSELECTED_GATE_NAME
                         ? ""

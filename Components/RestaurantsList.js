@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { Surface, Text } from "react-native-paper";
+import { Colors, IconButton, Surface, Text } from "react-native-paper";
 import { RESTAURANTS } from "../data/restaurants";
 
 /**
@@ -43,6 +43,15 @@ function RestaurantsList({ gate }) {
                                     {`Price range: ${priceRange}`}
                                 </Text>
                             </View>
+                            <IconButton
+                                style={styles.pinButton}
+                                icon="pin"
+                                iconColor={Colors.purple100}
+                                size={20}
+                                onPress={() =>
+                                    console.log("Pin this restaurant!")
+                                }
+                            />
                         </Surface>
                     );
                 })}
@@ -70,6 +79,9 @@ const styles = StyleSheet.create({
     },
     restaurantPriceRange: {
         fontSize: 14,
+    },
+    pinButton: {
+        alignSelf: "flex-end",
     },
 });
 
