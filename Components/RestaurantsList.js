@@ -16,7 +16,7 @@ function RestaurantsList({ gate }) {
         return (
             <View>
                 <Surface style={styles.restaurantSurface}>
-                    <Text>theoretically, all restaurants go here</Text>
+                    <Text>TODO: display all restaurants here</Text>
                 </Surface>
             </View>
         );

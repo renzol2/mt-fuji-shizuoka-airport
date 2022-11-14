@@ -32,8 +32,8 @@ function HomeScreen({ pinnedFlight }) {
                     </Button>
                     <Button
                         mode="contained"
-                        icon="door-sliding"
-                        style={styles.vStackItem} // CHANGE THIS TO BATHROOM ICON
+                        icon="toilet"
+                        style={styles.vStackItem}
                         labelStyle={styles.buttonText}
                         onPress={() => navigation.navigate("AmenityFinder")}
                     >

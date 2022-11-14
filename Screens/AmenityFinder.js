@@ -67,6 +67,7 @@ export default function AmenityFinder() {
                 onPress={() => {
                     navigation.navigate("AmenityResults", {
                         gateName: gateName,
+                        amenityType: amenityType,
                     });
                 }}
                 disabled={gateName === UNSELECTED_GATE_NAME}
