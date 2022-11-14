@@ -20,6 +20,7 @@ export default function AmenityFinder() {
     const [amenityType, setAmenityType] = React.useState(AMENITY_TYPES.ANY);
     const navigation = useNavigation();
 
+    // These objects are mapped to buttons
     const AMENITY_TYPE_BUTTONS = [
         { type: AMENITY_TYPES.DINING, buttonTitle: "Dining" },
         { type: AMENITY_TYPES.LOUNGES, buttonTitle: "Lounges" },
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     },
 
     amenityTypeButtonContainer: {
-        paddingHorizontal: 50,   
+        paddingHorizontal: 50,
     },
 
     amenityTypeButton: {

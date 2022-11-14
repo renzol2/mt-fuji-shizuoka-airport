@@ -1,25 +1,20 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import {
-    Button,
-    Card,
-    Title,
-    Paragraph,
-    Surface,
-    Appbar,
-} from "react-native-paper";
+import { ScrollView, StyleSheet } from "react-native";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { Text } from "react-native-paper";
 
-export default function AmenityResults({ route, navigation }) {
+export default function AmenityResults({ route }) {
     const { gateName } = route.params;
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
             <AppBar />
-            <Text style={{ color: "white" }}>{gateName}</Text>
+            <ScrollView>
+                <Text style={{ color: "white" }}>{gateName}</Text>
+            </ScrollView>
         </SafeAreaView>
     );
 }
