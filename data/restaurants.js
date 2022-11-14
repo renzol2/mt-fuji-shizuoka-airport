@@ -152,6 +152,12 @@ const STARBUCKS_B = {
     priceRange: "$",
 };
 
+/**
+ * @typedef Restaurants
+ * @type {Object.<string, Array<Restaurant>}
+ */
+
+/** @type {Restaurants} */
 const RESTAURANTS = {
     B1: [GOOSE_ISLAND_RESTAURANT],
     B2: [GOOSE_ISLAND_RESTAURANT],
