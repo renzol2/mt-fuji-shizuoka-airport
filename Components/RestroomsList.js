@@ -25,7 +25,9 @@ function RestroomsList({ gate }) {
                 {RESTROOMS[gate].map(({ hasBabyStation }) => {
 
                     return (
-                        <></>
+                        <Surface style={styles.restroomSurface}>
+                            <Text>Bathroom</Text>
+                        </Surface>
                     );
                 })}
             </View>
