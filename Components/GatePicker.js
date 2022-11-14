@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View } from "react-native";
 import { Button, Menu, Provider } from "react-native-paper";
-import { GATES } from "../data/amenities";
+import { GATES } from "../data/restaurants";
 
 const GatePicker = ({ gateName, setGateName }) => {
     const [visible, setVisible] = React.useState(false);
