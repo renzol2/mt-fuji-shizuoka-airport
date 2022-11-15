@@ -34,7 +34,7 @@ export default function RestaurantCard({
             key={name}
         >
             {/* Restaurant information */}
-            <View>
+            <View style={{ width: 300 }}>
                 {/* Name of restaurant */}
                 <Text style={styles.restaurantName}>{name}</Text>
 
@@ -47,6 +47,9 @@ export default function RestaurantCard({
                 <Text style={styles.restaurantPriceRange}>
                     {`Price range: ${priceRange}`}
                 </Text>
+
+                {/* Gate */}
+                <Text style={styles.restaurantGate}>{`Gate: ${gate}`}</Text>
             </View>
 
             {/* Buttons */}
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
         elevation: 4,
         textAlign: "left",
         backgroundColor: colorScheme.light,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     restaurantName: {
         fontSize: 23,
@@ -112,5 +115,9 @@ const styles = StyleSheet.create({
     },
     pinButton: {
         alignSelf: "flex-end",
+    },
+    restaurantGate: {
+        fontSize: 19,
+        fontWeight: "bold",
     },
 });

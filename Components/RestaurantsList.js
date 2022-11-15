@@ -13,30 +13,39 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
     if (RESTAURANTS[gate] === undefined) {
         // Display all restaurants
+        const restaurantsArray = Object.keys(RESTAURANTS)
+            .map((gate) => RESTAURANTS[gate])
+            .flatMap((r) => r);
         return (
             <View>
-                <Surface style={styles.restaurantSurface}>
-                    <Text>TODO: display all restaurants here</Text>
-                </Surface>
+                {restaurantsArray.map(({ name, hours, priceRange, gate }) => (
+                    <RestaurantCard
+                        key={name}
+                        name={name}
+                        hours={hours}
+                        priceRange={priceRange}
+                        gate={gate}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
+                    />
+                ))}
             </View>
         );
     } else {
         // Display restaurants at specific gate
         return (
             <View>
-                {RESTAURANTS[gate].map(({ name, hours, priceRange, gate }) => {
-                    return (
-                        <RestaurantCard
-                            key={name}
-                            name={name}
-                            hours={hours}
-                            priceRange={priceRange}
-                            gate={gate}
-                            pinnedAmenities={pinnedAmenities}
-                            setPinnedAmenities={setPinnedAmenities}
-                        />
-                    );
-                })}
+                {RESTAURANTS[gate].map(({ name, hours, priceRange, gate }) => (
+                    <RestaurantCard
+                        key={name}
+                        name={name}
+                        hours={hours}
+                        priceRange={priceRange}
+                        gate={gate}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
+                    />
+                ))}
             </View>
         );
     }
