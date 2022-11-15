@@ -4,20 +4,18 @@ import { Colors, IconButton, Surface, Text } from "react-native-paper";
 import { colorScheme } from "../Styles";
 
 /**
- * Renders basic restaurant information
+ * Renders basic shop information
  * @param {{
  *  name: string,
- *  hours: Array<import("../data/restaurants").Hours>,
- *  priceRange: string,
+ *  hours: Array<import("../data/shops").Hours>,
  *  gate: string,
  *  pinnedAmenities: Array,
  *  setPinnedAmenities: React.SetStateAction
  * }}
  */
-export default function RestaurantCard({
+export default function ShopCard({
     name,
     hours,
-    priceRange,
     gate,
     pinnedAmenities,
     setPinnedAmenities,
@@ -29,26 +27,21 @@ export default function RestaurantCard({
     const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
     return (
         <Surface
-            style={styles.restaurantSurface}
+            style={styles.shopSurface}
             key={name}
         >
-            {/* Restaurant information */}
+            {/* shop information */}
             <View style={{ width: 300 }}>
-                {/* Name of restaurant */}
-                <Text style={styles.restaurantName}>{name}</Text>
+                {/* Name of shop */}
+                <Text style={styles.shopName}>{name}</Text>
 
                 {/* Hours */}
-                <Text style={styles.restaurantHours}>
+                <Text style={styles.shopHours}>
                     {`Hours (${day}): ${openingTime} - ${closingTime}`}
                 </Text>
 
-                {/* Price range */}
-                <Text style={styles.restaurantPriceRange}>
-                    {`Price range: ${priceRange}`}
-                </Text>
-
                 {/* Gate */}
-                <Text style={styles.restaurantGate}>{`Gate: ${gate}`}</Text>
+                <Text style={styles.shopGate}>{`Gate: ${gate}`}</Text>
             </View>
 
             {/* Buttons */}
@@ -60,19 +53,19 @@ export default function RestaurantCard({
                     iconColor={Colors.purple100}
                     size={BUTTON_SIZE}
                     onPress={() => {
-                        console.log("Pin this restaurant!");
+                        console.log("Pin this shop!");
                         if (isPinned) {
-                            // if the restaurant is pinned, unpin the restaurant
+                            // if the shop is pinned, unpin the shop
                             setPinnedAmenities(
                                 pinnedAmenities.filter(
                                     (amenity) => name !== amenity.name
                                 )
                             );
                         } else {
-                            // if the restaurant is unpinned, pin the restaurant
+                            // if the shop is unpinned, pin the shop
                             setPinnedAmenities([
                                 ...pinnedAmenities,
-                                { name, hours, priceRange, gate },
+                                { name, hours, gate },
                             ]);
                         }
                     }}
@@ -92,7 +85,7 @@ export default function RestaurantCard({
 }
 
 const styles = StyleSheet.create({
-    restaurantSurface: {
+    shopSurface: {
         marginVertical: 10,
         padding: 20,
         elevation: 4,
@@ -101,21 +94,18 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
     },
-    restaurantName: {
+    shopName: {
         fontSize: 23,
         fontWeight: "bold",
     },
-    restaurantHours: {
+    shopHours: {
         fontSize: 18,
         fontWeight: "200",
-    },
-    restaurantPriceRange: {
-        fontSize: 17,
     },
     pinButton: {
         alignSelf: "flex-end",
     },
-    restaurantGate: {
+    shopGate: {
         fontSize: 19,
         fontWeight: "bold",
     },
