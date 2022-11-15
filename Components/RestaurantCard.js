@@ -23,6 +23,7 @@ export default function RestaurantCard({
     pinnedAmenities,
     setPinnedAmenities,
 }) {
+    const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
     const { day, openingTime, closingTime } = currentHours;
@@ -55,7 +56,7 @@ export default function RestaurantCard({
                     style={styles.pinButton}
                     icon={isPinned ? "pin" : "pin-outline"}
                     iconColor={Colors.purple100}
-                    size={20}
+                    size={BUTTON_SIZE}
                     onPress={() => {
                         console.log("Pin this restaurant!");
                         if (isPinned) {
@@ -78,9 +79,9 @@ export default function RestaurantCard({
                 {/* Crowdsource button */}
                 <IconButton
                     style={styles.pinButton}
-                    icon="car"
+                    icon="lightbulb"
                     iconColor={Colors.purple100}
-                    size={20}
+                    size={BUTTON_SIZE}
                     onPress={() => console.log("yay crowdsouricng!")}
                 />
             </View>
@@ -99,15 +100,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     restaurantName: {
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: "bold",
     },
     restaurantHours: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: "200",
     },
     restaurantPriceRange: {
-        fontSize: 14,
+        fontSize: 17,
     },
     pinButton: {
         alignSelf: "flex-end",
