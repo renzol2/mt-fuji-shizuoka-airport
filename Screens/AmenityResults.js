@@ -15,9 +15,12 @@ import { UNSELECTED_GATE_NAME } from "../data/gates";
 /**
  * Displays the search results for amenities. Takes a `gateName` and `amenityType`
  * through route parameters by `react-navigation`.
+ * 
+ * See: https://reactnavigation.org/docs/params
  */
-export default function AmenityResults({ route }) {
+export default function AmenityResults({ route, pinnedAmenities, setPinnedAmenities }) {
     const { gateName, amenityType } = route.params;
+    //console.log('pinned amenities: ', pinnedAmenities, setPinnedAmenities);
 
     // Dictionary object mapping `amenityType` to a list component of amenities
     const amenityTypeToList = {
@@ -41,17 +44,16 @@ export default function AmenityResults({ route }) {
                     Displays 'Amenities' when no gate is selected, and
                     displays 'Amenities at gate ___' when some gate is selected
                 */}
-                <Text style={styles.header}>{`Amenities ${
-                    gateName === UNSELECTED_GATE_NAME
-                        ? ""
-                        : "at gate " + gateName
-                }`}</Text>
+                <Text style={styles.header}>{`Amenities ${gateName === UNSELECTED_GATE_NAME
+                    ? ""
+                    : "at gate " + gateName
+                    }`}</Text>
 
                 {/* Amenity type */}
                 <Text style={styles.amenityType}>{amenityType}</Text>
 
                 {/* List of amenity components */}
-                <AmenityList gate={gateName} />
+                <AmenityList gate={gateName} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />
             </ScrollView>
         </SafeAreaView>
     );

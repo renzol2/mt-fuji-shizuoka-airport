@@ -7,9 +7,9 @@ const Stack = createNativeStackNavigator();
 
 /**
  * Navigator for all screens under the Home tab
- * @param {{ pinnedFlight: import("../data/flight").Flight }}
+ * @param {{ pinnedFlight: import("../data/flight").Flight, pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
-function HomeNavigator({ pinnedFlight }) {
+function HomeNavigator({ pinnedFlight, pinnedAmenities, setPinnedAmenities }) {
     return (
         <Stack.Navigator>
             <Stack.Screen
@@ -28,7 +28,7 @@ function HomeNavigator({ pinnedFlight }) {
             />
             <Stack.Screen
                 name="AmenityResults"
-                component={AmenityResults}
+                children={({ route }) => <AmenityResults route={route} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />}
                 options={{
                     headerShown: false,
                 }}

@@ -9,6 +9,7 @@
  * @typedef Shop
  * @property {string} name
  * @property {Array<Hours>} hours
+ * @property {string} gate
  */
 
 // FIXME: any reason this is unused? should we use it somewhere?
@@ -38,6 +39,7 @@ const HOYPOLOI = {
         { day: "Saturday", openingTime: "6am", closingTime: "5pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "5pm" },
     ],
+    gate: "B6"
 };
 
 /**@type {Shop} */
@@ -52,6 +54,7 @@ const JOHNSTON_AND_MURPHY = {
         { day: "Saturday", openingTime: "6am", closingTime: "6pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "6pm" },
     ],
+    gate: "B6"
 };
 
 /**@type {Shop} */
@@ -66,6 +69,7 @@ const VOSGES_HAUT_CHOCOLAT = {
         { day: "Saturday", openingTime: "10am", closingTime: "5pm" },
         { day: "Sunday", openingTime: "10am", closingTime: "5pm" },
     ],
+    gate: "B6"
 };
 
 /**@type {Shop} */
@@ -80,6 +84,7 @@ const INMOTION = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
+    gate: "B7",
 };
 
 /** @type {Shop} */
@@ -94,6 +99,7 @@ const FIELD_MUSEUM = {
         { day: "Saturday", openingTime: "8am", closingTime: "7pm" },
         { day: "Sunday", openingTime: "8am", closingTime: "7pm" },
     ],
+    gate: "B8",
 };
 
 /**@type {Shop} */
@@ -108,6 +114,7 @@ const OAKLEY = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
+    gate: "B8",
 };
 
 /**@type {Shop} */
@@ -122,6 +129,7 @@ const CNN_NEWSTAND_CHICAGO = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
+    gate: "B9",
 };
 
 /**@type {Shop} */
@@ -136,6 +144,7 @@ const DUTY_FREE_STORE = {
         { day: "Saturday", openingTime: "6am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
+    gate: "B9",
 };
 
 

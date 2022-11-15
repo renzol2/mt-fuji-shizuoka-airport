@@ -10,11 +10,13 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavigator() {
     const [pinnedFlight, setPinnedFlight] = useState(undefined);
+    const [pinnedAmenities, setPinnedAmenities] = useState([]);
+
     return (
         <Tab.Navigator barStyle={{ backgroundColor: colorScheme.primary }}>
             <Tab.Screen
                 name="Home"
-                children={() => <HomeNavigator pinnedFlight={pinnedFlight} />}
+                children={() => <HomeNavigator pinnedFlight={pinnedFlight} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />}
                 options={{
                     tabBarLabel: "Home",
                     tabBarIcon: ({ color }) => (
@@ -44,8 +46,8 @@ export default function BottomNavigator() {
                 name="Pins"
                 children={() => (
                     <PinsScreen
-                        pinnedFlight={pinnedFlight}
-                        setPinnedFlight={setPinnedFlight}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
                     />
                 )}
                 options={{

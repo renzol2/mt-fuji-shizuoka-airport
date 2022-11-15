@@ -10,6 +10,7 @@
  * @property {string} name
  * @property {Array<Hours>} hours
  * @property {string} priceRange
+ * @property {string} gate
  */
 
 /** @type {Restaurant} */
@@ -25,6 +26,7 @@ const GOOSE_ISLAND_RESTAURANT = {
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
     priceRange: "$$",
+    gate: "B1"
 };
 
 /** @type {Restaurant} */
@@ -43,11 +45,12 @@ const LA_TAPENADE_MEDITERRANEAN_CAFE_RESTAURANT = {
         { day: "Saturday", openingTime: "5:30am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "5:30am", closingTime: "9pm" },
     ],
+    gate: "B4"
 };
 
 /** @type {Restaurant} */
 const STARBUCKS_A = {
-    name: "Starbucks Coffee",
+    name: "Starbucks Coffee at B5",
     hours: [
         { day: "Monday", openingTime: "5am", closingTime: "9pm" },
         { day: "Tuesday", openingTime: "5am", closingTime: "9pm" },
@@ -58,6 +61,7 @@ const STARBUCKS_A = {
         { day: "Sunday", openingTime: "5am", closingTime: "9pm" },
     ],
     priceRange: "$$",
+    gate: "B5"
 };
 
 /** @type {Restaurant} */
@@ -73,6 +77,7 @@ const SMOOTHIE_KING_THE_GROVE = {
         { day: "Sunday", openingTime: "7am", closingTime: "9pm" },
     ],
     priceRange: "$",
+    gate: "B6"
 };
 
 /** @type {Restaurant} */
@@ -88,6 +93,7 @@ const GARRETT_POPCORN_SHOPS = {
         { day: "Sunday", openingTime: "7am", closingTime: "8pm" },
     ],
     priceRange: "$",
+    gate: "B7"
 };
 
 /** @type {Restaurant} */
@@ -103,6 +109,7 @@ const JAMBA_JUICE = {
         { day: "Sunday", openingTime: "7am", closingTime: "9pm" },
     ],
     priceRange: "$",
+    gate: "B7"
 };
 
 /** @type {Restaurant} */
@@ -118,6 +125,7 @@ const WOLFGANG_EXPRESS = {
         { day: "Sunday", openingTime: "5:30am", closingTime: "9pm" },
     ],
     priceRange: "$",
+    gate: "B7",
 };
 
 /** @type {Restaurant} */
@@ -133,11 +141,12 @@ const ELIS_CHEESECAKE = {
         { day: "Sunday", openingTime: "9am", closingTime: "6pm" },
     ],
     priceRange: "$",
+    gate: "B9",
 };
 
 /** @type {Restaurant} */
 const STARBUCKS_B = {
-    name: "Starbucks Coffee",
+    name: "Starbucks Coffee at B9",
     hours: [
         { day: "Monday", openingTime: "4:30am", closingTime: "9pm" },
         { day: "Tuesday", openingTime: "4:30am", closingTime: "9pm" },
@@ -148,6 +157,7 @@ const STARBUCKS_B = {
         { day: "Sunday", openingTime: "4:30am", closingTime: "9pm" },
     ],
     priceRange: "$",
+    gate: "B9",
 };
 
 /**
