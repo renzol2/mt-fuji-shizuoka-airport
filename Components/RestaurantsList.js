@@ -9,8 +9,6 @@ import RestaurantCard from "./RestaurantCard";
  * @param {{ gate: string, pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
 function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
-    // Number where 0 = Monday, 1 = Tuesday, ... 6 = Sunday
-
     if (RESTAURANTS[gate] === undefined) {
         // Display all restaurants
         const restaurantsArray = Object.keys(RESTAURANTS)
