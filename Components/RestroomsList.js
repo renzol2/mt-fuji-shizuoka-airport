@@ -7,9 +7,9 @@ import { colorScheme } from "../Styles";
 /**
  * Displays restrooms at `gate`, or all restrooms if gate is
  * `undefined` or cannot be found in the restroom data
- * @param {{ gate: string }}
+ * @param {{ gate: string, pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
-function RestroomsList({ gate }) {
+function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
     if (RESTROOMS[gate] === undefined) {
         return (

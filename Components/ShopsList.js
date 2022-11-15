@@ -6,9 +6,9 @@ import { colorScheme } from "../Styles";
 /**
  * Displays shops at `gate`, or all shops if gate is
  * `undefined` or cannot be found in the shop amenity data
- * @param {{ gate: string }}
+ * @param {{ gate: string, pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
-function ShopsList({ gate }) {
+function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
     const currentDayIndex = (new Date().getDay() + 6) % 7;
 
     if (SHOPS[gate] === undefined) {
