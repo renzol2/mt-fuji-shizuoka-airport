@@ -45,6 +45,7 @@ const LA_TAPENADE_MEDITERRANEAN_CAFE_RESTAURANT = {
         { day: "Saturday", openingTime: "5:30am", closingTime: "9pm" },
         { day: "Sunday", openingTime: "5:30am", closingTime: "9pm" },
     ],
+    priceRange: "$$$",
     gate: "B4"
 };
 
