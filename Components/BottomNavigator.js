@@ -1,20 +1,22 @@
+import { useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import Home from "../Screens/Home";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import HomeNavigator from "./HomeNavigator";
 import PinsScreen from "../Screens/PinsScreen";
 import SearchScreen from "../Screens/SearchScreen";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useState } from "react";
 import { colorScheme } from "../Styles";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavigator() {
     const [pinnedFlight, setPinnedFlight] = useState(undefined);
+    const [pinnedAmenities, setPinnedAmenities] = useState([]);
+
     return (
         <Tab.Navigator barStyle={{ backgroundColor: colorScheme.primary }}>
             <Tab.Screen
                 name="Home"
-                children={() => <Home pinnedFlight={pinnedFlight} />}
+                children={() => <HomeNavigator pinnedFlight={pinnedFlight} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />}
                 options={{
                     tabBarLabel: "Home",
                     tabBarIcon: ({ color }) => (
@@ -44,8 +46,8 @@ export default function BottomNavigator() {
                 name="Pins"
                 children={() => (
                     <PinsScreen
-                        pinnedFlight={pinnedFlight}
-                        setPinnedFlight={setPinnedFlight}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
                     />
                 )}
                 options={{

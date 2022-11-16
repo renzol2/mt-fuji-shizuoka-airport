@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
 import { Button, Card } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { flights } from "../data/flight";
@@ -9,8 +8,6 @@ import { colorScheme } from "../Styles";
 import AmenityFinder from "./AmenityFinder";
 import AmenityResults from "./AmenityResults";
 import FlightSearch from "./FlightSearch";
-
-const Stack = createNativeStackNavigator();
 
 /**
  * Home screen first shown
@@ -39,8 +36,8 @@ function HomeScreen({ pinnedFlight }) {
                     </Button>
                     <Button
                         mode="contained"
-                        icon="door-sliding"
-                        style={styles.vStackItem} // CHANGE THIS TO BATHROOM ICON
+                        icon="toilet"
+                        style={styles.vStackItem}
                         labelStyle={styles.buttonText}
                         onPress={() => navigation.navigate("AmenityFinder")}
                     >
@@ -91,45 +88,6 @@ function HomeScreen({ pinnedFlight }) {
     );
 }
 
-/**
- * Navigator for all screens under the Home tab
- * @param {{ pinnedFlight: import("../data/flight").Flight }}
- */
-export default function Home({ pinnedFlight }) {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen
-                name="HomeScreen"
-                children={() => <HomeScreen pinnedFlight={pinnedFlight} />}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="AmenityFinder"
-                component={AmenityFinder}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="AmenityResults"
-                component={AmenityResults}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="FlightSearch"
-                component={FlightSearch}
-                options={{
-                    headerShown: false,
-                }}
-            />
-        </Stack.Navigator>
-    );
-}
-
 // TODO later: MOVE THIS STYLESHEET TO STYLES.JS (AND EXPORT)
 const styles = StyleSheet.create({
     container: {
@@ -141,7 +99,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 50,
         justifyContent: "space-evenly",
-        marginTop: 70
+        marginTop: 70,
     },
 
     vStack: {
@@ -176,3 +134,5 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
 });
+
+export default HomeScreen;
