@@ -19,6 +19,7 @@ export const FLIGHTS = [
         number: "QR9298",
         departure: "ORD",
         arrival: "DFW",
+        date: "2022-11-17",
         time: "12:05",
         airline: "Qatar Airways",
         gate: "B3"
@@ -28,6 +29,7 @@ export const FLIGHTS = [
         number: "AA263",
         departure: "ORD",
         arrival: "LAX",
+        date: "2022-11-23",
         time: "01:05",
         airline: "American Airlines",
         gate: "B7"
@@ -37,6 +39,7 @@ export const FLIGHTS = [
         number: "AI126",
         departure: "ORD",
         arrival: "DEL",
+        date: "2022-12-01",
         time: "12:30",
         airline: "Air India",
         gate: "B9"
@@ -46,6 +49,7 @@ export const FLIGHTS = [
         number: "UA4804",
         departure: "ORD",
         arrival: "PWM",
+        date: "2022-12-12",
         time: "12:45",
         airline: "United Airlines",
         gate: "B6"
@@ -55,6 +59,7 @@ export const FLIGHTS = [
         number: "AC5781",
         departure: "ORD",
         arrival: "DEN",
+        date: "2022-12-19",
         time: "12:50",
         airline: "Air Canada",
         gate: "B4"
@@ -64,6 +69,7 @@ export const FLIGHTS = [
         number: "QR9298",
         departure: "ORD",
         arrival: "DFW",
+        date: "2022-12-20",
         time: "12:55",
         airline: "Qatar Airways",
         gate: "B3"
@@ -73,6 +79,7 @@ export const FLIGHTS = [
         number: "UA1568",
         departure: "ORD",
         arrival: "SEA",
+        date: "2022-12-30",
         time: "12:50",
         airline: "Unitd Airlines",
         gate: "B3"

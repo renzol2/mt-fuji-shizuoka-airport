@@ -1,6 +1,7 @@
 import HomeScreen from "../Screens/HomeScreen";
 import AmenityFinder from "../Screens/AmenityFinder";
 import AmenityResults from "../Screens/AmenityResults";
+import FlightSearch from "../Screens/FlightSearch";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,13 @@ function HomeNavigator({ pinnedFlight, pinnedAmenities, setPinnedAmenities }) {
             <Stack.Screen
                 name="AmenityResults"
                 children={({ route }) => <AmenityResults route={route} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FlightSearch"
+                component={FlightSearch}
                 options={{
                     headerShown: false,
                 }}
