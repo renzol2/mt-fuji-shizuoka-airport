@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Components",
+    "\\data",
+    "\\Screens"
   ],
+  "SelectedNode": "\\Components\\RestaurantCard.js",
   "PreviewInSolutionExplorer": false
 }
