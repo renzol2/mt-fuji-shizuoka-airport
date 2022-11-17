@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Surface, Text } from "react-native-paper";
 import { RESTROOMS } from "../data/restrooms";
 import { colorScheme } from "../Styles";
-
+import RestroomCard from "./RestroomCard";
 
 /**
  * Displays restrooms at `gate`, or all restrooms if gate is
@@ -10,26 +10,38 @@ import { colorScheme } from "../Styles";
  * @param {{ gate: string, pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
 function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
-
     if (RESTROOMS[gate] === undefined) {
+        // Display all restrooms
+        const restroomsArray = Object.keys(RESTROOMS)
+            .map((gate) => RESTROOMS[gate])
+            .flatMap((r) => r);
         return (
             <View>
-                <Surface style={styles.restroomSurface}>
-                    <Text>TODO: display all bathrooms here</Text>
-                </Surface>
+                {restroomsArray.map(({ name, gate, hasBabyStation }) => (
+                    <RestroomCard
+                        name={name}
+                        gate={gate}
+                        hasBabyStation={hasBabyStation}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
+                        key={name}
+                    />
+                ))}
             </View>
         );
     } else {
         return (
             <View>
-                {RESTROOMS[gate].map(({ hasBabyStation }) => {
-
-                    return (
-                        <Surface style={styles.restroomSurface}>
-                            <Text>Bathroom</Text>
-                        </Surface>
-                    );
-                })}
+                {RESTROOMS[gate].map(({ name, gate, hasBabyStation }) => (
+                    <RestroomCard
+                        name={name}
+                        gate={gate}
+                        hasBabyStation={hasBabyStation}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
+                        key={name}
+                    />
+                ))}
             </View>
         );
     }
