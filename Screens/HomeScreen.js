@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
-import { Button, Card } from "react-native-paper";
+import { Button, Card, Colors, IconButton } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
 
@@ -9,7 +9,7 @@ import { colorScheme } from "../Styles";
  * Home screen first shown
  * @param {{ pinnedFlight: import('../data/flight').Flight }}
  */
-function HomeScreen({ pinnedFlight }) {
+function HomeScreen({ pinnedFlight, setPinnedFlight }) {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
@@ -49,7 +49,29 @@ function HomeScreen({ pinnedFlight }) {
                     </Button>
                 </View>
 
-                {/* MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITARIONS IN A CARD */}
+                {/* Pin button */}
+                <IconButton
+                    icon="pin"
+                    size={50}
+                    color={Colors.white}
+                    onPress={() => {
+                        if (pinnedFlight === undefined) {
+                            setPinnedFlight({
+                                number: "Q1776",
+                                departure: "Chicago O'Hare",
+                                arrival: "Doha International",
+                                time: "13:00",
+                                airline: "Qatar Airlines",
+                                gate: "C6",
+                            });
+                        } else {
+                            setPinnedFlight(undefined);
+                        }
+                    }}
+                    style={{ alignSelf: 'center' }}
+                />
+                {/* Pinned flight card */}
+                {/* FIXME: MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITATIONS IN A CARD */}
                 <Card style={styles.card}>
                     <Card.Title
                         style={{ fontSize: 30 }}

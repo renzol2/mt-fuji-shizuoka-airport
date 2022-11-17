@@ -16,7 +16,14 @@ export default function BottomNavigator() {
         <Tab.Navigator barStyle={{ backgroundColor: colorScheme.primary }}>
             <Tab.Screen
                 name="Home"
-                children={() => <HomeNavigator pinnedFlight={pinnedFlight} pinnedAmenities={pinnedAmenities} setPinnedAmenities={setPinnedAmenities} />}
+                children={() => (
+                    <HomeNavigator
+                        pinnedFlight={pinnedFlight}
+                        setPinnedFlight={setPinnedFlight}
+                        pinnedAmenities={pinnedAmenities}
+                        setPinnedAmenities={setPinnedAmenities}
+                    />
+                )}
                 options={{
                     tabBarLabel: "Home",
                     tabBarIcon: ({ color }) => (
