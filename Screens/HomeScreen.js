@@ -1,13 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
-import { Button, Card } from "react-native-paper";
+import { Button, Card, Colors, IconButton } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import FlightCard from "../Components/FlightCard";
+import { flights } from "../data/flight";
 import { colorScheme } from "../Styles";
+import AmenityFinder from "./AmenityFinder";
+import AmenityResults from "./AmenityResults";
+import FlightSearch from "./FlightSearch";
 
 /**
  * Home screen first shown
- * @param {{ pinnedFlight: import('../data/flight').Flight }}
+ * @param {{ pinnedFlight: import('../data/flight').Flight | undefined }}
  */
 function HomeScreen({ pinnedFlight }) {
     const navigation = useNavigation();
@@ -44,12 +50,14 @@ function HomeScreen({ pinnedFlight }) {
                         icon="format-list-bulleted"
                         style={styles.vStackItem}
                         labelStyle={styles.buttonText}
+                        onPress={() => navigation.navigate("FlightSearch")}
                     >
                         Flight Search
                     </Button>
                 </View>
 
-                {/* MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITARIONS IN A CARD */}
+                {/* Pinned flight card */}
+                {/* FIXME: MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITATIONS IN A CARD */}
                 <Card style={styles.card}>
                     <Card.Title
                         style={{ fontSize: 30 }}
@@ -57,20 +65,16 @@ function HomeScreen({ pinnedFlight }) {
                     />
                     <Card.Content>
                         {pinnedFlight !== undefined ? (
-                            <>
-                                <Text style={styles.cardBodyRight}>
-                                    Gate: {pinnedFlight.gate}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Time: {pinnedFlight.time}{" "}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Departure: {pinnedFlight.departure}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Arrival: {pinnedFlight.arrival}
-                                </Text>
-                            </>
+                            <FlightCard
+                                allowPinning={false}
+                                airline={pinnedFlight.airline}
+                                arrival={pinnedFlight.arrival}
+                                date={pinnedFlight.date}
+                                departure={pinnedFlight.departure}
+                                gate={pinnedFlight.gate}
+                                number={pinnedFlight.number}
+                                time={pinnedFlight.time}
+                            />
                         ) : (
                             <Text style={styles.cardBody}>
                                 Pin a Flight to see it here!

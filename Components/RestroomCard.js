@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors, IconButton, Surface, Text } from "react-native-paper";
+import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
 /**
@@ -33,7 +34,10 @@ export default function RestroomCard({
                 <Text style={styles.restroomName}>{name}</Text>
 
                 {/* Baby station text */}
-                <Text style={styles.restroomBabyChangingStationText}>{'Baby changing station: ' + ( hasBabyStation ? 'Available' : 'Unavailable' )}</Text>
+                <Text style={styles.restroomBabyChangingStationText}>
+                    {"Baby changing station: " +
+                        (hasBabyStation ? "Available" : "Unavailable")}
+                </Text>
             </View>
 
             {/* Buttons */}
@@ -50,14 +54,20 @@ export default function RestroomCard({
                             // if the restroom is pinned, unpin the restroom
                             setPinnedAmenities(
                                 pinnedAmenities.filter(
-                                    (amenity) => name !== amenity.name
+                                    (amenity) =>
+                                        !(
+                                            name === amenity.name &&
+                                            gate === amenity.gate &&
+                                            AMENITY_TYPES.RESTROOMS ===
+                                                amenity.type
+                                        )
                                 )
                             );
                         } else {
                             // if the restroom is unpinned, pin the restroom
                             setPinnedAmenities([
                                 ...pinnedAmenities,
-                                { name, gate, hasBabyStation },
+                                { name, gate, type: AMENITY_TYPES.RESTROOMS },
                             ]);
                         }
                     }}

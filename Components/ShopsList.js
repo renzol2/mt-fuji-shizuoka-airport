@@ -11,7 +11,7 @@ import ShopCard from "./ShopCard";
  */
 function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
     if (SHOPS[gate] === undefined) {
-        // Display all shops 
+        // Display all shops
         const shopsArray = Object.keys(SHOPS)
             .map((gate) => SHOPS[gate])
             .flatMap((s) => s);
@@ -33,6 +33,9 @@ function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
         // Display shops at specific gate
         return (
             <View>
+                {SHOPS[gate].length === 0 && (
+                    <Text style={styles.bodyText}>No shops at {gate}.</Text>
+                )}
                 {SHOPS[gate].map(({ name, hours, gate }) => (
                     <ShopCard
                         key={name}
@@ -47,5 +50,14 @@ function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    bodyText: {
+        color: "white",
+        fontSize: 16,
+        marginHorizontal: 50,
+        alignSelf: "center",
+    },
+});
 
 export default ShopsList;
