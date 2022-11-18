@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
     },
     amenitySurface: {
-        width: 350,
+        width: 330,
+        minWidth: 350,
         marginVertical: 10,
         padding: 20,
         elevation: 4,
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
     amenityName: {
         fontSize: 20,
         fontWeight: "bold",
+        width: 200,
     },
     amenityGate: {
         fontSize: 19,

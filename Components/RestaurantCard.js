@@ -119,11 +119,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     restaurantName: {
-        fontSize: 23,
+        fontSize: 22,
         fontWeight: "bold",
     },
     restaurantHours: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: "200",
     },
     restaurantPriceRange: {
