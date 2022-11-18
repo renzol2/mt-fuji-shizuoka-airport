@@ -21,12 +21,7 @@ function HomeNavigator({
         <Stack.Navigator>
             <Stack.Screen
                 name="HomeScreen"
-                children={() => (
-                    <HomeScreen
-                        pinnedFlight={pinnedFlight}
-                        setPinnedFlight={setPinnedFlight}
-                    />
-                )}
+                children={() => <HomeScreen pinnedFlight={pinnedFlight} />}
                 options={{
                     headerShown: false,
                 }}
@@ -60,7 +55,13 @@ function HomeNavigator({
             />
             <Stack.Screen
                 name="FlightMatches"
-                children={({ route }) => <FlightMatches route={route} />}
+                children={({ route }) => (
+                    <FlightMatches
+                        route={route}
+                        pinnedFlight={pinnedFlight}
+                        setPinnedFlight={setPinnedFlight}
+                    />
+                )}
                 options={{
                     headerShown: false,
                 }}

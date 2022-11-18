@@ -12,7 +12,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function FlightSearch() {
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={{ height: "100%" }}>
             <StatusBar />
             <AppBar />
             <Tab.Navigator>
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
         backgroundColor: colorScheme.backgroundPage,
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox),
         alignItems: "center",
-        height: "100%",
     },
 
     header: {

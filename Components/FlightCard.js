@@ -12,6 +12,9 @@ import { colorScheme } from "../Styles";
  *  date: string,
  *  time: string,
  *  gate: string
+ *  allowPinning: boolean,
+ *  pinnedFlight: import("../data/flight").Flight | undefined,
+ *  setPinnedFlight: React.SetStateAction,
  * }}
  */
 export default function FlightCard({
@@ -22,32 +25,56 @@ export default function FlightCard({
     date,
     time,
     gate,
+    allowPinning = true,
+    pinnedFlight,
+    setPinnedFlight,
 }) {
     const BUTTON_SIZE = 24;
-    //const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
+    const isPinned =
+        pinnedFlight !== undefined && pinnedFlight.number === number;
     return (
-        <Surface
-            style={styles.flightSurface}
-        >
-            <View style={{ width: 300 }}>
+        <Surface style={styles.flightSurface}>
+            <View>
                 <Text style={styles.flightNum}>{number}</Text>
                 <Text style={styles.airport}>{`Airline: ${airline}`}</Text>
-                <Text style={styles.airport}>{`${departure} to ${arrival}`}</Text>
+                <Text
+                    style={styles.airport}
+                >{`${departure} to ${arrival}`}</Text>
                 <Text style={styles.date}>{`Departure Date: ${date}`}</Text>
                 <Text style={styles.time}>{`Departure Time: ${time}`}</Text>
                 <Text style={styles.gate}>{`Gate: ${gate}`}</Text>
             </View>
-            {/*<View>
-                <IconButton
-                    style={styles.pinButton}
-                    icon={isPinned ? "pin" : "pin-outline"}
-                    iconColor={Colors.purple100}
-                    size={BUTTON_SIZE}
-                    onPress={() => {
-                        
-                    }}
-                />
-            </View>*/}
+            {allowPinning && (
+                <View>
+                    <IconButton
+                        style={styles.pinButton}
+                        icon={isPinned ? "pin" : "pin-outline"}
+                        iconColor={Colors.purple100}
+                        size={BUTTON_SIZE}
+                        onPress={() => {
+                            // If this flight is pinned, unpin it
+                            if (isPinned) {
+                                setPinnedFlight(undefined);
+                            } else if (
+                                // If there's no pinned flight, or the current pinned flight is
+                                // not this flight, then pin this flight
+                                pinnedFlight === undefined ||
+                                (pinnedFlight !== undefined && !isPinned)
+                            ) {
+                                setPinnedFlight({
+                                    number,
+                                    airline,
+                                    departure,
+                                    arrival,
+                                    date,
+                                    time,
+                                    gate,
+                                });
+                            }
+                        }}
+                    />
+                </View>
+            )}
         </Surface>
     );
 }

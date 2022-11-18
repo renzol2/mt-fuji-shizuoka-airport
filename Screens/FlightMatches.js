@@ -8,9 +8,21 @@ import { colorScheme } from "../Styles";
 import FlightCard from "../Components/FlightCard";
 import { FLIGHTS } from "../data/flight";
 
-export default function FlightMatches({ route }) {
+/**
+ *
+ * @param {{
+ *  route: import("@react-navigation/native").Route,
+ *  pinnedFlight: import("../data/flight").Flight | undefined,
+ *  setPinnedFlight: React.SetStateAction
+ * }}
+ */
+export default function FlightMatches({
+    route,
+    pinnedFlight,
+    setPinnedFlight,
+}) {
     const { number, departure, arrival, date } = route.params;
-    var flights = [];
+    let flights = [];
 
     if (number === undefined || number === "") {
         flights = FLIGHTS.filter(
@@ -40,6 +52,7 @@ export default function FlightMatches({ route }) {
                             gate,
                         }) => (
                             <FlightCard
+                                key={number}
                                 number={number}
                                 airline={airline}
                                 departure={departure}
@@ -47,6 +60,8 @@ export default function FlightMatches({ route }) {
                                 date={date}
                                 time={time}
                                 gate={gate}
+                                pinnedFlight={pinnedFlight}
+                                setPinnedFlight={setPinnedFlight}
                             />
                         )
                     )}
