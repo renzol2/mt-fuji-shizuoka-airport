@@ -76,7 +76,8 @@ export default function RestaurantCard({
                                         !(
                                             name === amenity.name &&
                                             gate === amenity.gate &&
-                                            AMENITY_TYPES.DINING
+                                            AMENITY_TYPES.DINING ===
+                                                amenity.type
                                         )
                                 )
                             );
