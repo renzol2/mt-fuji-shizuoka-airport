@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors, IconButton, Surface, Text, Dialog, Portal, Paragraph, Button } from "react-native-paper";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { colorScheme } from "../Styles";
 
 /**
@@ -40,14 +41,14 @@ export default function RestaurantCard({
     const showTimepicker = () => setTimepicker(true);
     const hideTimepicker = () => setTimepicker(false);
 
-    /*const [mydate, setDate] = React.useState(new Date());
+    const [mydate, setDate] = React.useState(new Date());
 
     const displaymode = React.useState('time');
     const changeSelectedDate = (event, selectedDate) => {
        const currentDate = selectedDate || mydate;
        setDate(currentDate);
        setTimepicker(false)
-    }; */
+    };
     return (
         <Surface
             style={styles.restaurantSurface}
@@ -140,13 +141,13 @@ export default function RestaurantCard({
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
                         <Paragraph>What are the correct hours?</Paragraph>
-                        {/* <DateTimePicker
+                         <DateTimePicker
                                 value={mydate}
                                 mode={'time'}
                                 is24Hour={false}
                                 display={true}
                                 onChange={changeSelectedDate}
-                            /> */}
+                            />
                         </Dialog.Content>
                     </Dialog>
                 </Portal>
