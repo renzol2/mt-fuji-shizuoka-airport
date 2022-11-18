@@ -32,6 +32,9 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
     } else {
         return (
             <View>
+                {RESTROOMS[gate].length === 0 && (
+                    <Text style={styles.bodyText}>No restrooms at {gate}.</Text>
+                )}
                 {RESTROOMS[gate].map(({ name, gate, hasBabyStation }) => (
                     <RestroomCard
                         name={name}
@@ -48,6 +51,12 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 }
 
 const styles = StyleSheet.create({
+    bodyText: {
+        color: "white",
+        fontSize: 16,
+        marginHorizontal: 50,
+        alignSelf: "center",
+    },
     restroomSurface: {
         marginVertical: 10,
         padding: 20,

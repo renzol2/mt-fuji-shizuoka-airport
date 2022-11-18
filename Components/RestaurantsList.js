@@ -33,6 +33,9 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
         // Display restaurants at specific gate
         return (
             <View>
+                {RESTAURANTS[gate].length === 0 && (
+                    <Text style={styles.bodyText}>No restaurants at {gate}.</Text>
+                )}
                 {RESTAURANTS[gate].map(({ name, hours, priceRange, gate }) => (
                     <RestaurantCard
                         key={name}
@@ -48,5 +51,14 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    bodyText: {
+        color: "white",
+        fontSize: 16,
+        marginHorizontal: 50,
+        alignSelf: "center",
+    },
+});
 
 export default RestaurantsList;
