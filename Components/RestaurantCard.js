@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors, IconButton, Surface, Text } from "react-native-paper";
+import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
 /**
@@ -26,14 +27,19 @@ export default function RestaurantCard({
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
     const { day, openingTime, closingTime } = currentHours;
-    const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
+    const isPinned = pinnedAmenities.some(
+        (amenity) =>
+            name === amenity.name &&
+            gate === amenity.gate &&
+            AMENITY_TYPES.DINING === amenity.type
+    );
     return (
         <Surface
             style={styles.restaurantSurface}
             key={name}
         >
             {/* Restaurant information */}
-            <View style={{ width: 300 }}>
+            <View style={{ width: 200 }}>
                 {/* Name of restaurant */}
                 <Text style={styles.restaurantName}>{name}</Text>
 
@@ -62,17 +68,28 @@ export default function RestaurantCard({
                     onPress={() => {
                         console.log("Pin this restaurant!");
                         if (isPinned) {
-                            // if the restaurant is pinned, unpin the restaurant
+                            // if the restaurant is pinned, unpin the restaurant,
+                            // i.e. set pinned amenities to all pinned amenities that do not match the current restaurant
                             setPinnedAmenities(
                                 pinnedAmenities.filter(
-                                    (amenity) => name !== amenity.name
+                                    (amenity) =>
+                                        !(
+                                            name === amenity.name &&
+                                            gate === amenity.gate &&
+                                            AMENITY_TYPES.DINING ===
+                                                amenity.type
+                                        )
                                 )
                             );
                         } else {
                             // if the restaurant is unpinned, pin the restaurant
                             setPinnedAmenities([
                                 ...pinnedAmenities,
-                                { name, hours, priceRange, gate },
+                                {
+                                    name,
+                                    gate,
+                                    type: AMENITY_TYPES.DINING,
+                                },
                             ]);
                         }
                     }}
@@ -102,11 +119,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     restaurantName: {
-        fontSize: 23,
+        fontSize: 22,
         fontWeight: "bold",
     },
     restaurantHours: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: "200",
     },
     restaurantPriceRange: {

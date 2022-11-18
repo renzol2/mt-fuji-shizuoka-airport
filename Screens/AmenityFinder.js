@@ -22,11 +22,15 @@ export default function AmenityFinder() {
     // These objects are mapped to buttons.
     // We can add another object to the array to add more amenity types
     const AMENITY_TYPE_BUTTONS = [
-        { type: AMENITY_TYPES.DINING, buttonTitle: "Dining" },
-        { type: AMENITY_TYPES.LOUNGES, buttonTitle: "Lounges" },
-        { type: AMENITY_TYPES.MEDICAL, buttonTitle: "Medical" },
-        { type: AMENITY_TYPES.RESTROOMS, buttonTitle: "Restrooms" },
-        { type: AMENITY_TYPES.SHOPS, buttonTitle: "Shops" },
+        { type: AMENITY_TYPES.DINING, buttonTitle: "Dining", disabled: false },
+        { type: AMENITY_TYPES.LOUNGES, buttonTitle: "Lounges", disabled: true },
+        { type: AMENITY_TYPES.MEDICAL, buttonTitle: "Medical", disabled: true },
+        {
+            type: AMENITY_TYPES.RESTROOMS,
+            buttonTitle: "Restrooms",
+            disabled: false,
+        },
+        { type: AMENITY_TYPES.SHOPS, buttonTitle: "Shops", disabled: false },
     ];
 
     return (
@@ -43,10 +47,11 @@ export default function AmenityFinder() {
 
             {/* List of all amenity type buttons */}
             <View style={styles.amenityTypeButtonContainer}>
-                {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle }) => (
+                {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle, disabled }) => (
                     <Button
                         style={styles.amenityTypeButton}
                         mode="contained"
+                        disabled={disabled}
                         onPress={() => {
                             navigation.navigate("AmenityResults", {
                                 gateName: gateName,

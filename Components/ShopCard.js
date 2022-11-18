@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors, IconButton, Surface, Text } from "react-native-paper";
+import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
 /**
@@ -58,14 +59,19 @@ export default function ShopCard({
                             // if the shop is pinned, unpin the shop
                             setPinnedAmenities(
                                 pinnedAmenities.filter(
-                                    (amenity) => name !== amenity.name
+                                    (amenity) =>
+                                        !(
+                                            name === amenity.name &&
+                                            gate === amenity.gate &&
+                                            AMENITY_TYPES.SHOPS === amenity.type
+                                        )
                                 )
                             );
                         } else {
                             // if the shop is unpinned, pin the shop
                             setPinnedAmenities([
                                 ...pinnedAmenities,
-                                { name, hours, gate },
+                                { name, gate, type: AMENITY_TYPES.SHOPS },
                             ]);
                         }
                     }}
