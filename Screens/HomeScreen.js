@@ -3,7 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
 import { Button, Card, Colors, IconButton } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import { flights } from "../data/flight";
 import { colorScheme } from "../Styles";
+import AmenityFinder from "./AmenityFinder";
+import AmenityResults from "./AmenityResults";
+import FlightSearch from "./FlightSearch";
 
 /**
  * Home screen first shown
@@ -44,6 +48,7 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                         icon="format-list-bulleted"
                         style={styles.vStackItem}
                         labelStyle={styles.buttonText}
+                        onPress={() => navigation.navigate("FlightSearch")}
                     >
                         Flight Search
                     </Button>
