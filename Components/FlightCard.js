@@ -16,26 +16,28 @@ import { colorScheme } from "../Styles";
  */
 export default function FlightCard({
     number,
+    airline,
     departure,
     arrival,
     date,
     time,
-    gate
+    gate,
 }) {
     const BUTTON_SIZE = 24;
+    //const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
     return (
         <Surface
             style={styles.flightSurface}
         >
             <View style={{ width: 300 }}>
-                <Text style={styles.flightNum}>{`Flight ${number}`</Text>
+                <Text style={styles.flightNum}>{number}</Text>
+                <Text style={styles.airport}>{`Airline: ${airline}`}</Text>
                 <Text style={styles.airport}>{`${departure} to ${arrival}`}</Text>
-                <Text style={styles.date}>{date}</Text>
-                <Text style={styles.time}>{time}</Text>
+                <Text style={styles.date}>{`Departure Date: ${date}`}</Text>
+                <Text style={styles.time}>{`Departure Time: ${time}`}</Text>
                 <Text style={styles.gate}>{`Gate: ${gate}`}</Text>
             </View>
-
-            <View>
+            {/*<View>
                 <IconButton
                     style={styles.pinButton}
                     icon={isPinned ? "pin" : "pin-outline"}
@@ -45,7 +47,7 @@ export default function FlightCard({
                         
                     }}
                 />
-            </View>
+            </View>*/}
         </Surface>
     );
 }
@@ -75,6 +77,10 @@ const styles = StyleSheet.create({
     time: {
         fontSize: 18,
         fontWeight: "200",
+    },
+    gate: {
+        fontSize: 18,
+        fontWeight: "bold",
     },
     pinButton: {
         alignSelf: "flex-end",

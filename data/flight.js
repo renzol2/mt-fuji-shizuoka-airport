@@ -17,72 +17,81 @@
 export const FLIGHTS = [
     {
         number: "QR9298",
+        airline: "Qatar Airways",
         departure: "ORD",
         arrival: "DFW",
         date: "2022-11-17",
         time: "12:05",
-        airline: "Qatar Airways",
-        gate: "B3"
+        gate: "B3",
 
     },
     {
         number: "AA263",
+        airline: "American Airlines",
         departure: "ORD",
         arrival: "LAX",
         date: "2022-11-23",
         time: "01:05",
+        gate: "B7",
+
+    },
+    {
+        number: "UA3141",
         airline: "American Airlines",
-        gate: "B7"
+        departure: "ORD",
+        arrival: "LAX",
+        date: "2022-11-23",
+        time: "02:20",
+        gate: "B4",
 
     },
     {
         number: "AI126",
+        airline: "Air India",
         departure: "ORD",
         arrival: "DEL",
         date: "2022-12-01",
         time: "12:30",
-        airline: "Air India",
-        gate: "B9"
+        gate: "B9",
 
     },
     {
         number: "UA4804",
+        airline: "United Airlines",
         departure: "ORD",
         arrival: "PWM",
         date: "2022-12-12",
         time: "12:45",
-        airline: "United Airlines",
-        gate: "B6"
+        gate: "B6",
 
     },
     {
         number: "AC5781",
+        airline: "Air Canada",
         departure: "ORD",
         arrival: "DEN",
         date: "2022-12-19",
         time: "12:50",
-        airline: "Air Canada",
-        gate: "B4"
+        gate: "B4",
 
     },
     {
-        number: "QR9298",
+        number: "QR3468",
+        airline: "Qatar Airways",
         departure: "ORD",
         arrival: "DFW",
         date: "2022-12-20",
         time: "12:55",
-        airline: "Qatar Airways",
-        gate: "B3"
+        gate: "B3",
 
     },
     {
         number: "UA1568",
+        airline: "United Airlines",
         departure: "ORD",
         arrival: "SEA",
         date: "2022-12-30",
         time: "12:50",
-        airline: "Unitd Airlines",
-        gate: "B3"
-
+        gate: "B3",
     },
 ];
