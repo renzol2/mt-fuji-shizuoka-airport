@@ -39,7 +39,7 @@ export default function RestaurantCard({
             key={name}
         >
             {/* Restaurant information */}
-            <View style={{ width: 300 }}>
+            <View style={{ width: 200 }}>
                 {/* Name of restaurant */}
                 <Text style={styles.restaurantName}>{name}</Text>
 

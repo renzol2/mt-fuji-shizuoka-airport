@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import { IconButton, Surface } from "react-native-paper";
+import { Colors, IconButton, Surface } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
 /**
@@ -10,6 +11,7 @@ import { colorScheme } from "../Styles";
  * @param {{ pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
 export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
+    const BUTTON_SIZE = 24;
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
@@ -29,20 +31,78 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
                             amenities to easily access them here!
                         </Text>
                     )}
-                    {pinnedAmenities.map(({ name, gate, type }) => (
-                        <Surface
-                            key={name}
-                            style={styles.amenitySurface}
-                        >
-                            <Text style={styles.amenityName}>{name}</Text>
-                            <Text
-                                style={styles.amenityGate}
-                            >{`Gate: ${gate}`}</Text>
-                            <Text
-                                style={styles.amenityType}
-                            >{`Type: ${type}`}</Text>
-                        </Surface>
-                    ))}
+                    {pinnedAmenities.map(({ name, gate, type }) => {
+                        const isPinned = pinnedAmenities.some(
+                            (amenity) =>
+                                name === amenity.name && gate === amenity.gate
+                        );
+                        return (
+                            <Surface
+                                key={name}
+                                style={styles.amenitySurface}
+                            >
+                                <View>
+                                    <Text style={styles.amenityName}>
+                                        {name}
+                                    </Text>
+                                    <Text
+                                        style={styles.amenityGate}
+                                    >{`Gate: ${gate}`}</Text>
+                                    <Text
+                                        style={styles.amenityType}
+                                    >{`Type: ${type}`}</Text>
+                                </View>
+                                <View>
+                                    {/* Pin button */}
+                                    <IconButton
+                                        style={styles.pinButton}
+                                        icon={isPinned ? "pin" : "pin-outline"}
+                                        iconColor={Colors.purple100}
+                                        size={BUTTON_SIZE}
+                                        onPress={() => {
+                                            console.log("Pin this restaurant!");
+                                            if (isPinned) {
+                                                // if the restaurant is pinned, unpin the restaurant,
+                                                // i.e. set pinned amenities to all pinned amenities that do not match the current restaurant
+                                                setPinnedAmenities(
+                                                    pinnedAmenities.filter(
+                                                        (amenity) =>
+                                                            !(
+                                                                name ===
+                                                                    amenity.name &&
+                                                                gate ===
+                                                                    amenity.gate
+                                                            )
+                                                    )
+                                                );
+                                            } else {
+                                                // if the restaurant is unpinned, pin the restaurant
+                                                setPinnedAmenities([
+                                                    ...pinnedAmenities,
+                                                    {
+                                                        name,
+                                                        gate,
+                                                        type: AMENITY_TYPES.DINING,
+                                                    },
+                                                ]);
+                                            }
+                                        }}
+                                    />
+
+                                    {/* Crowdsource button */}
+                                    <IconButton
+                                        style={styles.pinButton}
+                                        icon="lightbulb"
+                                        iconColor={Colors.purple100}
+                                        size={BUTTON_SIZE}
+                                        onPress={() =>
+                                            console.log("yay crowdsouricng!")
+                                        }
+                                    />
+                                </View>
+                            </Surface>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -61,7 +121,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         textAlign: "left",
         backgroundColor: colorScheme.light,
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "space-between",
     },
     header: {
