@@ -2,8 +2,8 @@ import * as React from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useNavigation } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StatusBar } from "expo-status-bar";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
@@ -12,12 +12,18 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function FlightSearch() {
     return (
-        <SafeAreaView style={styles.container} style={{ height: "100%" }}>
+        <SafeAreaView style={styles.container}>
             <StatusBar />
             <AppBar />
             <Tab.Navigator>
-                <Tab.Screen name="By Flight #" component={FlightSearchByNumScreen} />
-                <Tab.Screen name="By Location" component={FlightSearchByLocScreen} />
+                <Tab.Screen
+                    name="By Flight #"
+                    component={FlightSearchByNumScreen}
+                />
+                <Tab.Screen
+                    name="By Location"
+                    component={FlightSearchByLocScreen}
+                />
             </Tab.Navigator>
         </SafeAreaView>
     );
@@ -31,7 +37,7 @@ function FlightSearchByNumScreen() {
             <TextInput
                 style={styles.input}
                 value={flightNum}
-                onChangeText={text => setFlightNum(text)}
+                onChangeText={(text) => setFlightNum(text)}
                 placeholder="Flight number"
                 placeholderTextColor="grey"
             />
@@ -40,14 +46,14 @@ function FlightSearchByNumScreen() {
                 mode="contained"
                 onPress={() => {
                     navigation.navigate("FlightMatches", {
-                        number: flightNum
-                    })
+                        number: flightNum,
+                    });
                 }}
             >
                 Find flight!
             </Button>
         </SafeAreaView>
-    )
+    );
 }
 
 function FlightSearchByLocScreen() {
@@ -60,21 +66,21 @@ function FlightSearchByLocScreen() {
             <TextInput
                 style={styles.input}
                 value={departure}
-                onChangeText={text => setDeparture(text)}
+                onChangeText={(text) => setDeparture(text)}
                 placeholder="Departure"
                 placeholderTextColor="grey"
             />
             <TextInput
                 style={styles.input}
                 value={arrival}
-                onChangeText={text => setArrival(text)}
+                onChangeText={(text) => setArrival(text)}
                 placeholder="Arrival"
                 placeholderTextColor="grey"
             />
             <TextInput
                 style={styles.input}
                 value={date}
-                onChangeText={text => setDate(text)}
+                onChangeText={(text) => setDate(text)}
                 placeholder="Flight Date"
                 placeholderTextColor="grey"
             />
@@ -85,21 +91,22 @@ function FlightSearchByLocScreen() {
                     navigation.navigate("FlightMatches", {
                         departure: departure,
                         arrival: arrival,
-                        date: date
+                        date: date,
                     });
                 }}
             >
                 Find flight!
             </Button>
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox),
-        alignItems: "center"
+        alignItems: "center",
+        height: "100%",
     },
 
     header: {
@@ -117,12 +124,12 @@ const styles = StyleSheet.create({
         padding: 10,
         alignSelf: "stretch",
         borderColor: "white",
-        color: "white"
+        color: "white",
     },
 
     findFlightButton: {
         marginTop: 25,
         paddingVertical: 5,
-        width: 200
+        width: 200,
     },
 });

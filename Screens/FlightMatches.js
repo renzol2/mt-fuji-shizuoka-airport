@@ -13,11 +13,14 @@ export default function FlightMatches({ route }) {
     var flights = [];
 
     if (number === undefined || number === "") {
-        flights = FLIGHTS
-            .filter(flight => flight.departure == departure && flight.arrival == arrival && flight.date == date);
+        flights = FLIGHTS.filter(
+            (flight) =>
+                flight.departure == departure &&
+                flight.arrival == arrival &&
+                flight.date == date
+        );
     } else {
-        flights = FLIGHTS
-            .filter(flight => flight.number == number);
+        flights = FLIGHTS.filter((flight) => flight.number == number);
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -26,17 +29,27 @@ export default function FlightMatches({ route }) {
             <ScrollView>
                 <Text style={styles.header}>Matching Flights</Text>
                 <View style={styles.flightCardContainer}>
-                    {flights.map(({ number, airline, departure, arrival, date, time, gate }) => (
-                        <FlightCard
-                            number={number}
-                            airline={airline}
-                            departure={departure}
-                            arrival={arrival}
-                            date={date}
-                            time={time}
-                            gate={gate}
-                        />
-                    ))}
+                    {flights.map(
+                        ({
+                            number,
+                            airline,
+                            departure,
+                            arrival,
+                            date,
+                            time,
+                            gate,
+                        }) => (
+                            <FlightCard
+                                number={number}
+                                airline={airline}
+                                departure={departure}
+                                arrival={arrival}
+                                date={date}
+                                time={time}
+                                gate={gate}
+                            />
+                        )
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
