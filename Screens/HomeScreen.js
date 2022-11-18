@@ -1,8 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
 import { Button, Card, Colors, IconButton } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import FlightCard from "../Components/FlightCard";
 import { flights } from "../data/flight";
 import { colorScheme } from "../Styles";
 import AmenityFinder from "./AmenityFinder";
@@ -11,9 +13,9 @@ import FlightSearch from "./FlightSearch";
 
 /**
  * Home screen first shown
- * @param {{ pinnedFlight: import('../data/flight').Flight }}
+ * @param {{ pinnedFlight: import('../data/flight').Flight | undefined }}
  */
-function HomeScreen({ pinnedFlight, setPinnedFlight }) {
+function HomeScreen({ pinnedFlight }) {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
@@ -54,27 +56,6 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                     </Button>
                 </View>
 
-                {/* Pin button */}
-                <IconButton
-                    icon="pin"
-                    size={50}
-                    color={Colors.white}
-                    onPress={() => {
-                        if (pinnedFlight === undefined) {
-                            setPinnedFlight({
-                                number: "Q1776",
-                                departure: "Chicago O'Hare",
-                                arrival: "Doha International",
-                                time: "13:00",
-                                airline: "Qatar Airlines",
-                                gate: "C6",
-                            });
-                        } else {
-                            setPinnedFlight(undefined);
-                        }
-                    }}
-                    style={{ alignSelf: 'center' }}
-                />
                 {/* Pinned flight card */}
                 {/* FIXME: MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITATIONS IN A CARD */}
                 <Card style={styles.card}>
@@ -84,20 +65,16 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                     />
                     <Card.Content>
                         {pinnedFlight !== undefined ? (
-                            <>
-                                <Text style={styles.cardBodyRight}>
-                                    Gate: {pinnedFlight.gate}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Time: {pinnedFlight.time}{" "}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Departure: {pinnedFlight.departure}
-                                </Text>
-                                <Text style={styles.cardBody}>
-                                    Arrival: {pinnedFlight.arrival}
-                                </Text>
-                            </>
+                            <FlightCard
+                                allowPinning={false}
+                                airline={pinnedFlight.airline}
+                                arrival={pinnedFlight.arrival}
+                                date={pinnedFlight.date}
+                                departure={pinnedFlight.departure}
+                                gate={pinnedFlight.gate}
+                                number={pinnedFlight.number}
+                                time={pinnedFlight.time}
+                            />
                         ) : (
                             <Text style={styles.cardBody}>
                                 Pin a Flight to see it here!

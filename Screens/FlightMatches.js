@@ -8,16 +8,31 @@ import { colorScheme } from "../Styles";
 import FlightCard from "../Components/FlightCard";
 import { FLIGHTS } from "../data/flight";
 
-export default function FlightMatches({ route }) {
+/**
+ *
+ * @param {{
+ *  route: import("@react-navigation/native").Route,
+ *  pinnedFlight: import("../data/flight").Flight | undefined,
+ *  setPinnedFlight: React.SetStateAction
+ * }}
+ */
+export default function FlightMatches({
+    route,
+    pinnedFlight,
+    setPinnedFlight,
+}) {
     const { number, departure, arrival, date } = route.params;
-    var flights = [];
+    let flights = [];
 
     if (number === undefined || number === "") {
-        flights = FLIGHTS
-            .filter(flight => flight.departure == departure && flight.arrival == arrival && flight.date == date);
+        flights = FLIGHTS.filter(
+            (flight) =>
+                flight.departure == departure &&
+                flight.arrival == arrival &&
+                flight.date == date
+        );
     } else {
-        flights = FLIGHTS
-            .filter(flight => flight.number == number);
+        flights = FLIGHTS.filter((flight) => flight.number == number);
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -26,17 +41,30 @@ export default function FlightMatches({ route }) {
             <ScrollView>
                 <Text style={styles.header}>Matching Flights</Text>
                 <View style={styles.flightCardContainer}>
-                    {flights.map(({ number, airline, departure, arrival, date, time, gate }) => (
-                        <FlightCard
-                            number={number}
-                            airline={airline}
-                            departure={departure}
-                            arrival={arrival}
-                            date={date}
-                            time={time}
-                            gate={gate}
-                        />
-                    ))}
+                    {flights.map(
+                        ({
+                            number,
+                            airline,
+                            departure,
+                            arrival,
+                            date,
+                            time,
+                            gate,
+                        }) => (
+                            <FlightCard
+                                key={number}
+                                number={number}
+                                airline={airline}
+                                departure={departure}
+                                arrival={arrival}
+                                date={date}
+                                time={time}
+                                gate={gate}
+                                pinnedFlight={pinnedFlight}
+                                setPinnedFlight={setPinnedFlight}
+                            />
+                        )
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
