@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Colors, IconButton, Surface, Text } from "react-native-paper";
+import { Colors, IconButton, Surface, Text, Dialog, Portal, Paragraph, Button } from "react-native-paper";
 import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
@@ -26,6 +26,11 @@ export default function ShopCard({
     const currentHours = hours[currentDayIndex];
     const { day, openingTime, closingTime } = currentHours;
     const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
+    const [visible, setVisible] = React.useState(false);
+
+    const showDialog = () => setVisible(true);
+  
+    const hideDialog = () => setVisible(false);
     return (
         <Surface
             style={styles.shopSurface}
@@ -83,8 +88,19 @@ export default function ShopCard({
                     icon="lightbulb"
                     iconColor={Colors.purple100}
                     size={BUTTON_SIZE}
-                    onPress={() => console.log("yay crowdsouricng!")}
+                    onPress={showDialog}
                 />
+                <Portal>
+                    <Dialog visible={visible} onDismiss={hideDialog}>
+                        <Dialog.Title>Hours</Dialog.Title>
+                        <Dialog.Content>
+                        <Paragraph>Shop</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                        <Button onPress={hideDialog}>Done</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
             </View>
         </Surface>
     );
