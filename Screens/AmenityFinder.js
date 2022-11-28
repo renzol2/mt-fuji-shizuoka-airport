@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
@@ -23,8 +23,6 @@ export default function AmenityFinder() {
     // We can add another object to the array to add more amenity types
     const AMENITY_TYPE_BUTTONS = [
         { type: AMENITY_TYPES.DINING, buttonTitle: "Dining", disabled: false },
-        { type: AMENITY_TYPES.LOUNGES, buttonTitle: "Lounges", disabled: true },
-        { type: AMENITY_TYPES.MEDICAL, buttonTitle: "Medical", disabled: true },
         {
             type: AMENITY_TYPES.RESTROOMS,
             buttonTitle: "Restrooms",
@@ -35,35 +33,38 @@ export default function AmenityFinder() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar />
-            <AppBar />
+            <ImageBackground style={styles.imageBackround} source={require("../images/airportgate.jpg")} resizeMode="cover">
+                <StatusBar />
+                <AppBar />
 
-            {/* Gate picker component */}
-            <GatePicker
-                gateName={gateName}
-                setGateName={setGateName}
-                isUnselected={gateName === UNSELECTED_GATE_NAME}
-            />
+                {/* Gate picker component */}
+                <GatePicker
+                    gateName={gateName}
+                    setGateName={setGateName}
+                    isUnselected={gateName === UNSELECTED_GATE_NAME}
+                />
 
-            {/* List of all amenity type buttons */}
-            <View style={styles.amenityTypeButtonContainer}>
-                {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle, disabled }) => (
-                    <Button
-                        style={styles.amenityTypeButton}
-                        mode="contained"
-                        disabled={disabled}
-                        onPress={() => {
-                            navigation.navigate("AmenityResults", {
-                                gateName: gateName,
-                                amenityType: type,
-                            });
-                        }}
-                        key={type}
-                    >
-                        {buttonTitle}
-                    </Button>
-                ))}
-            </View>
+                {/* List of all amenity type buttons */}
+                <View style={styles.amenityTypeButtonContainer}>
+                    {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle, disabled }) => (
+                        <Button
+                            style={styles.amenityTypeButton}
+                            mode="contained"
+                            disabled={disabled}
+                            onPress={() => {
+                                navigation.navigate("AmenityResults", {
+                                    gateName: gateName,
+                                    amenityType: type,
+                                });
+                            }}
+                            key={type}
+                        >
+                            {buttonTitle}
+                        </Button>
+                    ))}
+                </View>
+            </ImageBackground>
+
         </SafeAreaView>
     );
 }
@@ -72,6 +73,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
+    },
+    imageBackround: {
+        flex: 1
     },
 
     amenityTypeButtonContainer: {
@@ -82,6 +86,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         paddingVertical: 5,
         backgroundColor: colorScheme.primary,
+        borderRadius: 30
     },
 
     selectedAmenityButton: {

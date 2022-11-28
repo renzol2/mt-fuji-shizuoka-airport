@@ -1,7 +1,7 @@
 export const colorScheme = {
-    primary: "#3f51b5",
-    dark: "#002984",
-    light: "#757de8",
+    primary: "#03a9f4",
+    dark: "#007ac1",
+    light: "#67daff",
     secondary: "#b39ddb",
-    backgroundPage: "#212121",
+    backgroundPage: "#e1f5fe",
 };

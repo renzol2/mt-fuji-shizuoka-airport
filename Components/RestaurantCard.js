@@ -35,7 +35,7 @@ export default function RestaurantCard({
 
     const [crowdsourceUpdate, setcrowdsourceUpdate] = React.useState(false);
     const showCrowdsourceUpdate = () => setcrowdsourceUpdate(true);
-    const hideCrowdsourceUpdate = () => setcrowdsourceUpdate(false);   
+    const hideCrowdsourceUpdate = () => setcrowdsourceUpdate(false);
 
     const [timepicker, setTimepicker] = React.useState(false);
     const showTimepicker = () => setTimepicker(true);
@@ -45,9 +45,9 @@ export default function RestaurantCard({
 
     const displaymode = React.useState('time');
     const changeSelectedDate = (event, selectedDate) => {
-       const currentDate = selectedDate || mydate;
-       setDate(currentDate);
-       setTimepicker(false)
+        const currentDate = selectedDate || mydate;
+        setDate(currentDate);
+        setTimepicker(false)
     };
     const isPinned = pinnedAmenities.some(
         (amenity) =>
@@ -99,7 +99,7 @@ export default function RestaurantCard({
                                             name === amenity.name &&
                                             gate === amenity.gate &&
                                             AMENITY_TYPES.DINING ===
-                                                amenity.type
+                                            amenity.type
                                         )
                                 )
                             );
@@ -130,35 +130,35 @@ export default function RestaurantCard({
                     <Dialog visible={crowdsourcePrompt} onDismiss={hideCrowdsourcePrompt}>
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
-                        <Paragraph>Is this info correct?</Paragraph>
-                        <Paragraph>{`Current Hours: ${openingTime} - ${closingTime}`}</Paragraph>
+                            <Paragraph>Is this info correct?</Paragraph>
+                            <Paragraph>{`Current Hours: ${openingTime} - ${closingTime}`}</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions>
-                        <Button onPress={hideCrowdsourcePrompt}>Yes</Button>
-                        <Button onPress={showCrowdsourceUpdate}>No</Button>
-                        
+                            <Button onPress={hideCrowdsourcePrompt}>Yes</Button>
+                            <Button onPress={showCrowdsourceUpdate}>No</Button>
+
                         </Dialog.Actions>
                     </Dialog>
                     {/* Crowdsource update dialog */}
                     <Dialog visible={crowdsourceUpdate} onDismiss={hideCrowdsourceUpdate}>
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
-                        <Paragraph>What are the correct hours?</Paragraph>
-                        <Button onPress={showTimepicker}>Open: {openingTime}</Button>
-                        <Button onPress={showTimepicker}>Close: {closingTime}</Button>
+                            <Paragraph>What are the correct hours?</Paragraph>
+                            <Button onPress={showTimepicker}>Open: {openingTime}</Button>
+                            <Button onPress={showTimepicker}>Close: {closingTime}</Button>
                         </Dialog.Content>
                         <Dialog.Actions>
-                        <Button onPress={hideCrowdsourceUpdate}>Confirm</Button>
-                        <Button onPress={hideCrowdsourceUpdate}>Cancel</Button>
-                        
+                            <Button onPress={hideCrowdsourceUpdate}>Confirm</Button>
+                            <Button onPress={hideCrowdsourceUpdate}>Cancel</Button>
+
                         </Dialog.Actions>
                     </Dialog>
                     {/* Timepicker dialog */}
                     <Dialog visible={timepicker} onDismiss={hideTimepicker}>
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
-                        <Paragraph>What are the correct hours?</Paragraph>
-                         <DateTimePicker
+                            <Paragraph>What are the correct hours?</Paragraph>
+                            <DateTimePicker
                                 value={mydate}
                                 mode={'time'}
                                 is24Hour={false}
@@ -179,20 +179,26 @@ const styles = StyleSheet.create({
         padding: 20,
         elevation: 4,
         textAlign: "left",
-        backgroundColor: colorScheme.light,
+        backgroundColor: colorScheme.dark,
         flexDirection: "row",
         justifyContent: "space-between",
+        borderRadius: 30,
+        marginLeft: 10,
+        marginRight: 10
     },
     restaurantName: {
         fontSize: 22,
         fontWeight: "bold",
+        color: 'white'
     },
     restaurantHours: {
         fontSize: 17,
         fontWeight: "200",
+        color: 'white'
     },
     restaurantPriceRange: {
         fontSize: 17,
+        color: 'white'
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -200,5 +206,6 @@ const styles = StyleSheet.create({
     restaurantGate: {
         fontSize: 19,
         fontWeight: "bold",
+        color: 'white'
     },
 });
