@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        color: "white",
+        color: "black",
         marginTop: 20,
     },
 
@@ -122,13 +122,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         alignSelf: "stretch",
-        borderColor: "white",
-        color: "white",
+        borderColor: colorScheme.dark,
+        color: "black",
     },
 
     findFlightButton: {
         marginTop: 25,
         paddingVertical: 5,
         width: 200,
+        backgroundColor: colorScheme.primary,
+        borderRadius: 30
     },
 });
