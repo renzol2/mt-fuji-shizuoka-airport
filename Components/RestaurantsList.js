@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { Colors, IconButton, Surface, Text } from "react-native-paper";
 import { RESTAURANTS } from "../data/restaurants";
 import RestaurantCard from "./RestaurantCard";
@@ -15,7 +15,9 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
             .map((gate) => RESTAURANTS[gate])
             .flatMap((r) => r);
         return (
+
             <View>
+
                 {restaurantsArray.map(({ name, hours, priceRange, gate }) => (
                     <RestaurantCard
                         key={name}
@@ -27,6 +29,7 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
                         setPinnedAmenities={setPinnedAmenities}
                     />
                 ))}
+
             </View>
         );
     } else {
@@ -54,10 +57,13 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
 const styles = StyleSheet.create({
     bodyText: {
-        color: "white",
+        color: "gray",
         fontSize: 16,
         marginHorizontal: 50,
         alignSelf: "center",
+    },
+    imageBackround: {
+        flex: 1,
     },
 });
 

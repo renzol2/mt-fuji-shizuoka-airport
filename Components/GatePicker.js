@@ -2,6 +2,7 @@ import * as React from "react";
 import { View } from "react-native";
 import { Button, Menu, Provider } from "react-native-paper";
 import { GATES } from "../data/gates";
+import { colorScheme } from "../Styles";
 
 /**
  * Paper menu that allows user to select a gate
@@ -26,7 +27,7 @@ const GatePicker = ({ gateName, setGateName, isUnselected }) => {
                 visible={visible}
                 onDismiss={closeMenu}
                 anchor={
-                    <Button
+                    <Button style={{ backgroundColor: colorScheme.dark, borderRadius: 30 }}
                         mode="contained"
                         onPress={openMenu}
                     >

@@ -15,7 +15,7 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <AppBar />
+            <AppBar useBackButton={false} />
             <ScrollView>
                 <View
                     style={{
@@ -129,11 +129,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        color: "white",
+        color: "gray",
         marginTop: 20,
     },
     bodyText: {
-        color: "white",
+        color: "gray",
         fontSize: 16,
         marginHorizontal: 50,
         alignSelf: "center",

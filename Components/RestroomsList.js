@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ImageBackground, Image } from "react-native";
 import { Surface, Text } from "react-native-paper";
 import { RESTROOMS } from "../data/restrooms";
 import { colorScheme } from "../Styles";
@@ -16,6 +16,7 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
             .map((gate) => RESTROOMS[gate])
             .flatMap((r) => r);
         return (
+
             <View>
                 {restroomsArray.map(({ name, gate, hasBabyStation }) => (
                     <RestroomCard
@@ -28,6 +29,7 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
                     />
                 ))}
             </View>
+
         );
     } else {
         return (
@@ -52,7 +54,7 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
 const styles = StyleSheet.create({
     bodyText: {
-        color: "white",
+        color: "gray",
         fontSize: 16,
         marginHorizontal: 50,
         alignSelf: "center",

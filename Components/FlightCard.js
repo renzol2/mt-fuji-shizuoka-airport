@@ -85,29 +85,37 @@ const styles = StyleSheet.create({
         padding: 20,
         elevation: 4,
         textAlign: "left",
-        backgroundColor: colorScheme.light,
+        backgroundColor: colorScheme.dark,
         flexDirection: "row",
         justifyContent: "space-between",
+        borderRadius: 30,
+        marginLeft: 10,
+        marginRight: 10
     },
     flightNum: {
         fontSize: 23,
         fontWeight: "bold",
+        color: 'white'
     },
     airport: {
         fontSize: 18,
         fontWeight: "200",
+        color: 'white'
     },
     date: {
         fontSize: 18,
         fontWeight: "200",
+        color: 'white'
     },
     time: {
         fontSize: 18,
         fontWeight: "200",
+        color: 'white'
     },
     gate: {
         fontSize: 18,
         fontWeight: "bold",
+        color: 'white'
     },
     pinButton: {
         alignSelf: "flex-end",
