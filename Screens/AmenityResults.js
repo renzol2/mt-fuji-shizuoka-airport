@@ -68,14 +68,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        color: "white",
+        color: "black",
         marginTop: 20,
     },
     amenityType: {
         fontSize: 18,
         fontWeight: "bold",
         textAlign: "center",
-        color: "white",
+        color: "black",
         marginVertical: 20,
     },
 });

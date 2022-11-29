@@ -29,7 +29,7 @@ export default function ShopCard({
     const [visible, setVisible] = React.useState(false);
 
     const showDialog = () => setVisible(true);
-  
+
     const hideDialog = () => setVisible(false);
     return (
         <Surface
@@ -94,10 +94,10 @@ export default function ShopCard({
                     <Dialog visible={visible} onDismiss={hideDialog}>
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
-                        <Paragraph>Shop</Paragraph>
+                            <Paragraph>Shop</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions>
-                        <Button onPress={hideDialog}>Done</Button>
+                            <Button onPress={hideDialog}>Done</Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
@@ -112,17 +112,22 @@ const styles = StyleSheet.create({
         padding: 20,
         elevation: 4,
         textAlign: "left",
-        backgroundColor: colorScheme.light,
+        backgroundColor: colorScheme.dark,
         flexDirection: "row",
         justifyContent: "space-between",
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 30
     },
     shopName: {
         fontSize: 23,
         fontWeight: "bold",
+        color: 'white'
     },
     shopHours: {
         fontSize: 18,
         fontWeight: "200",
+        color: 'white'
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -130,5 +135,6 @@ const styles = StyleSheet.create({
     shopGate: {
         fontSize: 19,
         fontWeight: "bold",
+        color: 'white'
     },
 });

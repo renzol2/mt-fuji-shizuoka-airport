@@ -59,7 +59,7 @@ export default function RestroomCard({
                                             name === amenity.name &&
                                             gate === amenity.gate &&
                                             AMENITY_TYPES.RESTROOMS ===
-                                                amenity.type
+                                            amenity.type
                                         )
                                 )
                             );
@@ -92,16 +92,21 @@ const styles = StyleSheet.create({
         padding: 20,
         elevation: 4,
         textAlign: "left",
-        backgroundColor: colorScheme.light,
+        backgroundColor: colorScheme.dark,
         flexDirection: "row",
         justifyContent: "space-between",
+        borderRadius: 30,
+        marginLeft: 10,
+        marginRight: 10
     },
     restroomName: {
         fontSize: 23,
         fontWeight: "bold",
+        color: 'white'
     },
     restroomBabyChangingStationText: {
         fontSize: 17,
+        color: 'white'
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -109,5 +114,6 @@ const styles = StyleSheet.create({
     restroomGate: {
         fontSize: 19,
         fontWeight: "bold",
+        color: 'white'
     },
 });

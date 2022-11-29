@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        color: "white",
+        color: "gray",
         marginTop: 20,
     },
     flightCardContainer: {
