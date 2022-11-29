@@ -54,7 +54,7 @@ function RestroomsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
 const styles = StyleSheet.create({
     bodyText: {
-        color: "white",
+        color: "gray",
         fontSize: 16,
         marginHorizontal: 50,
         alignSelf: "center",
