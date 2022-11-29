@@ -2,10 +2,16 @@ import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from "react-native";
-import { Button, Card, Colors, IconButton } from "react-native-paper";
+import {
+    Button,
+    Card,
+    Colors,
+    DataTable,
+    IconButton,
+} from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import FlightCard from "../Components/FlightCard";
-import { flights } from "../data/flight";
+import { FLIGHTS } from "../data/flight";
 import { colorScheme } from "../Styles";
 import AmenityFinder from "./AmenityFinder";
 import AmenityResults from "./AmenityResults";
@@ -82,6 +88,64 @@ function HomeScreen({ pinnedFlight }) {
                         )}
                     </Card.Content>
                 </Card>
+
+                {/* Flight schedule */}
+                {/* TODO: move this to a new screen */}
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator
+                >
+                    <DataTable style={styles.flightSchedule}>
+                        <DataTable.Header>
+                            <DataTable.Title>Number</DataTable.Title>
+                            <DataTable.Title>Airline</DataTable.Title>
+                            <DataTable.Title>Departure</DataTable.Title>
+                            <DataTable.Title>Arrival</DataTable.Title>
+                            <DataTable.Title>Date</DataTable.Title>
+                            <DataTable.Title>Time</DataTable.Title>
+                            <DataTable.Title>Gate</DataTable.Title>
+                        </DataTable.Header>
+                        {FLIGHTS.map((flight) => (
+                            <DataTable.Row key={flight.number}>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.number}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.airline}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.departure}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.arrival}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.date}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.time}
+                                </DataTable.Cell>
+                                <DataTable.Cell
+                                    style={styles.flightScheduleCell}
+                                >
+                                    {flight.gate}
+                                </DataTable.Cell>
+                            </DataTable.Row>
+                        ))}
+                    </DataTable>
+                </ScrollView>
             </ScrollView>
         </SafeAreaView>
     );
@@ -131,6 +195,14 @@ const styles = StyleSheet.create({
     cardBodyRight: {
         alignContent: "flex-end",
         fontSize: 25,
+    },
+    flightSchedule: {
+        minWidth: 1000,
+        textAlign: "center",
+        backgroundColor: colorScheme.light,
+    },
+    flightScheduleCell: {
+        minWidth: 150,
     },
 });
 
