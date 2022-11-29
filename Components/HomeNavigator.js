@@ -21,7 +21,12 @@ function HomeNavigator({
         <Stack.Navigator>
             <Stack.Screen
                 name="HomeScreen"
-                children={() => <HomeScreen pinnedFlight={pinnedFlight} />}
+                children={() => (
+                    <HomeScreen
+                        pinnedFlight={pinnedFlight}
+                        setPinnedFlight={setPinnedFlight}
+                    />
+                )}
                 options={{
                     headerShown: false,
                 }}
