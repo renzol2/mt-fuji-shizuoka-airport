@@ -1,7 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { SafeAreaView, ScrollView, Text, View, StyleSheet, ImageBackground } from "react-native";
+import {
+    SafeAreaView,
+    ScrollView,
+    Text,
+    View,
+    StyleSheet,
+    ImageBackground,
+} from "react-native";
 import { Button, Card, Colors, IconButton } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import FlightCard from "../Components/FlightCard";
@@ -19,8 +26,12 @@ function HomeScreen({ pinnedFlight }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <AppBar />
-            <ImageBackground styles={styles.imageBackround} source={require('../images/clouds32.png')} resizeMode="cover">
+            <AppBar useBackButton={false} />
+            <ImageBackground
+                styles={styles.imageBackround}
+                source={require("../images/clouds32.png")}
+                resizeMode="cover"
+            >
                 <ScrollView>
                     <View style={styles.hStack}>
                         {/* Empty View to move objects down the screen */}
@@ -81,7 +92,6 @@ function HomeScreen({ pinnedFlight }) {
                             )}
                         </Card.Content>
                     </Card>
-
                 </ScrollView>
             </ImageBackground>
         </SafeAreaView>
@@ -92,14 +102,13 @@ function HomeScreen({ pinnedFlight }) {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
-        flex: 1
+        flex: 1,
         // makes component take up all available space (https://reactnative.dev/docs/flexbox)
     },
 
     imageBackround: {
         flex: 1,
-        justifyContent: "center"
-
+        justifyContent: "center",
     },
 
     hStack: {
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
         width: 300,
         padding: 10,
         backgroundColor: colorScheme.primary,
-        borderRadius: 30
+        borderRadius: 30,
     },
 
     buttonText: {
@@ -133,7 +142,7 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: colorScheme.light,
-        height: 250
+        height: 250,
     },
     cardBody: {
         fontSize: 20,

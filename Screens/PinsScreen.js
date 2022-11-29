@@ -15,7 +15,7 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <AppBar />
+            <AppBar useBackButton={false} />
             <ScrollView>
                 <View
                     style={{
