@@ -3,7 +3,13 @@ import * as React from "react";
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { Colors, IconButton, Surface } from "react-native-paper";
 import AppBar from "../Components/AppBar";
+import RestaurantCard from "../Components/RestaurantCard";
+import RestroomCard from "../Components/RestroomCard";
+import ShopCard from "../Components/ShopCard";
 import { AMENITY_TYPES } from "../data/amenityTypes";
+import { RESTAURANTS } from "../data/restaurants";
+import { RESTROOMS } from "../data/restrooms";
+import { SHOPS } from "../data/shops";
 import { colorScheme } from "../Styles";
 
 /**
@@ -11,7 +17,6 @@ import { colorScheme } from "../Styles";
  * @param {{ pinnedAmenities: Array, setPinnedAmenities: React.SetStateAction }}
  */
 export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
-    const BUTTON_SIZE = 24;
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
@@ -20,7 +25,6 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
                 <View
                     style={{
                         flex: 1,
-                        alignItems: "center",
                         justifyContent: "center",
                     }}
                 >
@@ -31,77 +35,59 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
                             amenities to easily access them here!
                         </Text>
                     )}
+                    {/* List of pinned amenities */}
                     {pinnedAmenities.map(({ name, gate, type }) => {
-                        const isPinned = pinnedAmenities.some(
-                            (amenity) =>
-                                name === amenity.name && gate === amenity.gate
-                        );
-                        return (
-                            <Surface
-                                key={name}
-                                style={styles.amenitySurface}
-                            >
-                                <View>
-                                    <Text style={styles.amenityName}>
-                                        {name}
-                                    </Text>
-                                    <Text
-                                        style={styles.amenityGate}
-                                    >{`Gate: ${gate}`}</Text>
-                                    <Text
-                                        style={styles.amenityType}
-                                    >{`Type: ${type}`}</Text>
-                                </View>
-                                <View>
-                                    {/* Pin button */}
-                                    <IconButton
-                                        style={styles.pinButton}
-                                        icon={isPinned ? "pin" : "pin-outline"}
-                                        iconColor={Colors.purple100}
-                                        size={BUTTON_SIZE}
-                                        onPress={() => {
-                                            console.log("Pin this restaurant!");
-                                            if (isPinned) {
-                                                // if the restaurant is pinned, unpin the restaurant,
-                                                // i.e. set pinned amenities to all pinned amenities that do not match the current restaurant
-                                                setPinnedAmenities(
-                                                    pinnedAmenities.filter(
-                                                        (amenity) =>
-                                                            !(
-                                                                name ===
-                                                                    amenity.name &&
-                                                                gate ===
-                                                                    amenity.gate
-                                                            )
-                                                    )
-                                                );
-                                            } else {
-                                                // if the restaurant is unpinned, pin the restaurant
-                                                setPinnedAmenities([
-                                                    ...pinnedAmenities,
-                                                    {
-                                                        name,
-                                                        gate,
-                                                        type: AMENITY_TYPES.DINING,
-                                                    },
-                                                ]);
-                                            }
-                                        }}
-                                    />
-
-                                    {/* Crowdsource button */}
-                                    <IconButton
-                                        style={styles.pinButton}
-                                        icon="lightbulb"
-                                        iconColor={Colors.purple100}
-                                        size={BUTTON_SIZE}
-                                        onPress={() =>
-                                            console.log("yay crowdsouricng!")
-                                        }
-                                    />
-                                </View>
-                            </Surface>
-                        );
+                        const getAmenityInfo = (name, gate, type) => {
+                            // Get the mock data object based on amenity type
+                            let amenityDatabase;
+                            if (type === AMENITY_TYPES.DINING) {
+                                amenityDatabase = RESTAURANTS;
+                            } else if (type === AMENITY_TYPES.SHOPS) {
+                                amenityDatabase = SHOPS;
+                            } else {
+                                amenityDatabase = RESTROOMS;
+                            }
+                            const amenityData = amenityDatabase[gate].find(
+                                (amenity) => amenity.name === name
+                            );
+                            return amenityData;
+                        };
+                        const amenityData = getAmenityInfo(name, gate, type);
+                        if (type === AMENITY_TYPES.DINING) {
+                            return (
+                                <RestaurantCard
+                                    name={name}
+                                    hours={amenityData.hours}
+                                    gate={gate}
+                                    pinnedAmenities={pinnedAmenities}
+                                    setPinnedAmenities={setPinnedAmenities}
+                                    priceRange={amenityData.priceRange}
+                                    key={name}
+                                />
+                            );
+                        } else if (type === AMENITY_TYPES.SHOPS) {
+                            return (
+                                <ShopCard
+                                    name={name}
+                                    hours={amenityData.hours}
+                                    gate={gate}
+                                    pinnedAmenities={pinnedAmenities}
+                                    setPinnedAmenities={setPinnedAmenities}
+                                    key={name}
+                                />
+                            );
+                        } else {
+                            return (
+                                <RestroomCard
+                                    name={name}
+                                    hasBabyStation={amenityData.hasBabyStation}
+                                    gate={gate}
+                                    pinnedAmenities={pinnedAmenities}
+                                    setPinnedAmenities={setPinnedAmenities}
+                                    key={name}
+                                />
+                            );
+                        }
                     })}
                 </View>
             </ScrollView>
