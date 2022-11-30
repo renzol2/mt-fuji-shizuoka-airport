@@ -1,7 +1,16 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Colors, IconButton, Surface, Text, Dialog, Portal, Paragraph, Button } from "react-native-paper";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {
+    Colors,
+    IconButton,
+    Surface,
+    Text,
+    Dialog,
+    Portal,
+    Paragraph,
+    Button,
+} from "react-native-paper";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
@@ -27,27 +36,50 @@ export default function RestaurantCard({
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
-    const { day, openingTime, closingTime } = currentHours;
+    const { day } = currentHours;
+    const [openingTime, setOpeningTime] = React.useState(
+        currentHours.openingTime
+    );
+    const [closingTime, setClosingTime] = React.useState(
+        currentHours.closingTime
+    );
+    const [changingOpeningTime, setChangingOpeningTime] = React.useState(true);
 
-    const [crowdsourcePrompt, setcrowdsourcePrompt] = React.useState(false);
-    const showCrowdsourcePrompt = () => setcrowdsourcePrompt(true);
-    const hideCrowdsourcePrompt = () => setcrowdsourcePrompt(false);
+    const [crowdsourcePrompt, setCrowdsourcePrompt] = React.useState(false);
+    const showCrowdsourcePrompt = () => setCrowdsourcePrompt(true);
+    const hideCrowdsourcePrompt = () => setCrowdsourcePrompt(false);
 
-    const [crowdsourceUpdate, setcrowdsourceUpdate] = React.useState(false);
-    const showCrowdsourceUpdate = () => setcrowdsourceUpdate(true);
-    const hideCrowdsourceUpdate = () => setcrowdsourceUpdate(false);
+    const [crowdsourceUpdate, setCrowdsourceUpdate] = React.useState(false);
+    const showCrowdsourceUpdate = () => setCrowdsourceUpdate(true);
+    const hideCrowdsourceUpdate = () => setCrowdsourceUpdate(false);
 
     const [timepicker, setTimepicker] = React.useState(false);
     const showTimepicker = () => setTimepicker(true);
     const hideTimepicker = () => setTimepicker(false);
 
-    const [mydate, setDate] = React.useState(new Date());
+    const [mydate, setCurrentDate] = React.useState(new Date());
 
-    const displaymode = React.useState('time');
     const changeSelectedDate = (event, selectedDate) => {
-        const currentDate = selectedDate || mydate;
-        setDate(currentDate);
-        setTimepicker(false)
+        if (event.type === "set") {
+            const { nativeEvent } = event;
+            const newTime = new Date(nativeEvent.timestamp)
+                .toTimeString()
+                .substring(0, 8);
+            const hour = newTime.substring(0, 2);
+            const timeString =
+                (parseInt(hour) % 12).toString() +
+                newTime.substring(2, 5) +
+                (hour > 12 ? "pm" : "am");
+            if (changingOpeningTime) {
+                setOpeningTime(timeString);
+            } else {
+                setClosingTime(timeString);
+            }
+
+            const currentDate = selectedDate || mydate;
+            setCurrentDate(currentDate);
+            setTimepicker(false);
+        }
     };
     const isPinned = pinnedAmenities.some(
         (amenity) =>
@@ -67,7 +99,9 @@ export default function RestaurantCard({
 
                 {/* Hours */}
                 <Text style={styles.restaurantHours}>
-                    {`Hours (${day}): ${openingTime} - ${closingTime}`}
+                    {/* If you set these to the state variables `openingTime` and `closingTime`, 
+                    it will actually change to what the user selected in crowdsourcing */}
+                    {`Hours (${day}): ${currentHours.openingTime} - ${currentHours.closingTime}`}
                 </Text>
 
                 {/* Price range */}
@@ -99,7 +133,7 @@ export default function RestaurantCard({
                                             name === amenity.name &&
                                             gate === amenity.gate &&
                                             AMENITY_TYPES.DINING ===
-                                            amenity.type
+                                                amenity.type
                                         )
                                 )
                             );
@@ -127,7 +161,10 @@ export default function RestaurantCard({
                 />
                 <Portal>
                     {/* Crowdsource prompt dialog */}
-                    <Dialog visible={crowdsourcePrompt} onDismiss={hideCrowdsourcePrompt}>
+                    <Dialog
+                        visible={crowdsourcePrompt}
+                        onDismiss={hideCrowdsourcePrompt}
+                    >
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
                             <Paragraph>Is this info correct?</Paragraph>
@@ -136,31 +173,53 @@ export default function RestaurantCard({
                         <Dialog.Actions>
                             <Button onPress={hideCrowdsourcePrompt}>Yes</Button>
                             <Button onPress={showCrowdsourceUpdate}>No</Button>
-
                         </Dialog.Actions>
                     </Dialog>
                     {/* Crowdsource update dialog */}
-                    <Dialog visible={crowdsourceUpdate} onDismiss={hideCrowdsourceUpdate}>
+                    <Dialog
+                        visible={crowdsourceUpdate}
+                        onDismiss={hideCrowdsourceUpdate}
+                    >
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
                             <Paragraph>What are the correct hours?</Paragraph>
-                            <Button onPress={showTimepicker}>Open: {openingTime}</Button>
-                            <Button onPress={showTimepicker}>Close: {closingTime}</Button>
+                            <Button
+                                onPress={() => {
+                                    setChangingOpeningTime(true);
+                                    showTimepicker();
+                                }}
+                            >
+                                Open: {openingTime}
+                            </Button>
+                            <Button
+                                onPress={() => {
+                                    setChangingOpeningTime(false);
+                                    showTimepicker();
+                                }}
+                            >
+                                Close: {closingTime}
+                            </Button>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideCrowdsourceUpdate}>Confirm</Button>
-                            <Button onPress={hideCrowdsourceUpdate}>Cancel</Button>
-
+                            <Button onPress={hideCrowdsourceUpdate}>
+                                Confirm
+                            </Button>
+                            <Button onPress={hideCrowdsourceUpdate}>
+                                Cancel
+                            </Button>
                         </Dialog.Actions>
                     </Dialog>
                     {/* Timepicker dialog */}
-                    <Dialog visible={timepicker} onDismiss={hideTimepicker}>
+                    <Dialog
+                        visible={timepicker}
+                        onDismiss={hideTimepicker}
+                    >
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
                             <Paragraph>What are the correct hours?</Paragraph>
                             <DateTimePicker
                                 value={mydate}
-                                mode={'time'}
+                                mode={"time"}
                                 is24Hour={false}
                                 display={true}
                                 onChange={changeSelectedDate}
@@ -184,21 +243,21 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         borderRadius: 30,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
     },
     restaurantName: {
         fontSize: 22,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
     },
     restaurantHours: {
         fontSize: 17,
         fontWeight: "200",
-        color: 'white'
+        color: "white",
     },
     restaurantPriceRange: {
         fontSize: 17,
-        color: 'white'
+        color: "white",
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -206,6 +265,6 @@ const styles = StyleSheet.create({
     restaurantGate: {
         fontSize: 19,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
     },
 });
