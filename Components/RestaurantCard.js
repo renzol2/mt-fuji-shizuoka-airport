@@ -21,6 +21,7 @@ import { colorScheme } from "../Styles";
  *  hours: Array<import("../data/restaurants").Hours>,
  *  priceRange: string,
  *  gate: string,
+ *  description: string,
  *  pinnedAmenities: Array,
  *  setPinnedAmenities: React.SetStateAction
  * }}
@@ -30,9 +31,15 @@ export default function RestaurantCard({
     hours,
     priceRange,
     gate,
+    description,
     pinnedAmenities,
     setPinnedAmenities,
 }) {
+    const [visible, setVisible] = React.useState(false);
+
+    const showDialog = () => setVisible(true);
+
+    const hideDialog = () => setVisible(false);
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
@@ -111,6 +118,31 @@ export default function RestaurantCard({
 
                 {/* Gate */}
                 <Text style={styles.restaurantGate}>{`Gate: ${gate}`}</Text>
+
+                {/* Description */}
+                <Button
+                    color="white"
+                    style={styles.detailsButton}
+                    onPress={() => showDialog()}
+                >
+                    Details
+                </Button>
+                <Portal>
+                    <Dialog
+                        visible={visible}
+                        onDismiss={hideDialog}
+                        style={{ backgroundColor: colorScheme.backgroundPage }}
+                    >
+                        <Dialog.Title>{name}</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>{description}</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button onPress={hideDialog} color={colorScheme.dark}>Close</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
+                {/* <Text style={styles.restaurantDescription}>{description}</Text> */}
             </View>
 
             {/* Buttons */}
@@ -266,5 +298,13 @@ const styles = StyleSheet.create({
         fontSize: 19,
         fontWeight: "bold",
         color: "white",
+    },
+    restaurantDescription: {
+        fontSize: 17,
+        color: "white",
+    },
+    detailsButton: {
+        alignSelf: "flex-start",
+        marginLeft: -16,
     },
 });

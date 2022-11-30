@@ -58,6 +58,7 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
                                 <RestaurantCard
                                     name={name}
                                     hours={amenityData.hours}
+                                    description={amenityData.description}
                                     gate={gate}
                                     pinnedAmenities={pinnedAmenities}
                                     setPinnedAmenities={setPinnedAmenities}
