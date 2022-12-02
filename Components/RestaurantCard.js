@@ -9,6 +9,7 @@ import {
     Portal,
     Paragraph,
     Button,
+    Snackbar
 } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
@@ -56,6 +57,14 @@ export default function RestaurantCard({
     const [timepicker, setTimepicker] = React.useState(false);
     const showTimepicker = () => setTimepicker(true);
     const hideTimepicker = () => setTimepicker(false);
+
+    const [visible, setVisible] = React.useState(false);
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
+        hideCrowdsourceUpdate();
+        hideCrowdsourcePrompt();
+    }
+    const onDismissSnackBar = () => setVisible(false);
 
     const [mydate, setCurrentDate] = React.useState(new Date());
 
@@ -201,7 +210,7 @@ export default function RestaurantCard({
                             </Button>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideCrowdsourceUpdate}>
+                            <Button onPress={onToggleSnackBar}>
                                 Confirm
                             </Button>
                             <Button onPress={hideCrowdsourceUpdate}>
@@ -226,8 +235,15 @@ export default function RestaurantCard({
                             />
                         </Dialog.Content>
                     </Dialog>
+                    <Snackbar
+                        visible={visible}
+                        onDismiss={onDismissSnackBar}>
+                        Updated hours have been submitted.
+                    </Snackbar>
                 </Portal>
+
             </View>
+
         </Surface>
     );
 }
