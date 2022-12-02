@@ -40,8 +40,8 @@ export default function FlightCard({
                 <Text
                     style={styles.airport}
                 >{`${departure} to ${arrival}`}</Text>
-                <Text style={styles.date}>{`Departure Date: ${date}`}</Text>
-                <Text style={styles.time}>{`Departure Time: ${time}`}</Text>
+                <Text style={styles.date}>{`Departure Date: ${date.toDateString()}`}</Text>
+                <Text style={styles.time}>{`Departure Time: ${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)} ${(date.getHours < 12 ? 'AM' : 'PM')}`}</Text>
                 <Text style={styles.gate}>{`Gate: ${gate}`}</Text>
             </View>
             {allowPinning && (
@@ -92,32 +92,38 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10
     },
+
     flightNum: {
         fontSize: 23,
         fontWeight: "bold",
         color: 'white'
     },
+
     airport: {
         fontSize: 18,
         fontWeight: "200",
         color: 'white'
     },
+
     date: {
         fontSize: 18,
         fontWeight: "200",
         color: 'white'
     },
+
     time: {
         fontSize: 18,
         fontWeight: "200",
         color: 'white'
     },
+
     gate: {
         fontSize: 18,
         fontWeight: "bold",
         color: 'white'
     },
+
     pinButton: {
-        alignSelf: "flex-end",
-    },
+        alignSelf: "flex-end"
+    }
 });

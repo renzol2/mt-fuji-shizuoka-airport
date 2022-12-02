@@ -28,13 +28,13 @@ export default function FlightMatches({
     if (number === undefined || number === "") {
         flights = FLIGHTS.filter(
             (flight) =>
-                flight.departure == departure &&
-                flight.arrival == arrival &&
-                flight.date == date
+                flight.departure == departure.toUpperCase().trim() &&
+                flight.arrival == arrival.toUpperCase().trim() &&
+                flight.date.toDateString() == date
         );
         /** Find flights by flight number */
     } else {
-        flights = FLIGHTS.filter((flight) => flight.number == number);
+        flights = FLIGHTS.filter((flight) => flight.number == number.toUpperCase().replace(/ /g, ""));
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -85,18 +85,21 @@ export default function FlightMatches({
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
-        flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
+        flex: 1 // makes component take up all available space (https://reactnative.dev/docs/flexbox)
     },
+
     header: {
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
         color: "gray",
-        marginTop: 20,
+        marginTop: 20
     },
+
     flightCardContainer: {
-        marginTop: 10,
+        marginTop: 10
     },
+
     surfaceStyle: {
         marginVertical: 10,
         padding: 20,
@@ -106,13 +109,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 30,
         marginLeft: 10,
-        marginRight: 10,
+        marginRight: 10
     },
+
     errorTitle: {
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        color: "black",
-
+        color: "black"
     }
 });

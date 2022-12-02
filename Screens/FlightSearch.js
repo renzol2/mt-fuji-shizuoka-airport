@@ -1,12 +1,13 @@
 import * as React from "react";
-import { StyleSheet, TextInput } from "react-native";
-import { Button } from "react-native-paper";
+import { View, StyleSheet, TextInput, Pressable } from "react-native";
+import { Text, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StatusBar } from "expo-status-bar";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -60,7 +61,19 @@ function FlightSearchByLocScreen() {
     const navigation = useNavigation();
     const [departure, setDeparture] = React.useState(null);
     const [arrival, setArrival] = React.useState(null);
-    const [date, setDate] = React.useState(null);
+    const [date, setDate] = React.useState(new Date());
+    const [show, setShow] = React.useState(false);
+
+    const onChange = (event, selectedDate) => {
+        if (Platform.OS === 'android') {
+            setShow(false);
+            setDate(selectedDate);
+        }
+        if (event.type === 'dismissed') {
+            return;
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <TextInput
@@ -77,13 +90,28 @@ function FlightSearchByLocScreen() {
                 placeholder="Arrival"
                 placeholderTextColor="grey"
             />
-            <TextInput
+
+            <Pressable
                 style={styles.input}
+                onPress={() => {setShow(true)}}
+            >
+                <View pointerEvents="none">
+                    <TextInput
+                        mode="contained"
+                        placeholder={"Date: " + date.toDateString()}
+                        editable={false}
+                    >
+                    </TextInput>
+                </View>
+            </Pressable>
+
+            {show && <DateTimePicker
+                testID="dateTimePicker"
                 value={date}
-                onChangeText={(text) => setDate(text)}
-                placeholder="Flight Date"
-                placeholderTextColor="grey"
-            />
+                onChange={onChange}
+                placeholderText="Select Date"
+            />}
+
             <Button
                 style={styles.findFlightButton}
                 mode="contained"
@@ -91,7 +119,7 @@ function FlightSearchByLocScreen() {
                     navigation.navigate("FlightMatches", {
                         departure: departure,
                         arrival: arrival,
-                        date: date,
+                        date: date.toDateString(),
                     });
                 }}
             >
@@ -105,7 +133,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colorScheme.backgroundPage,
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox),
-        alignItems: "center",
+        alignItems: "center"
     },
 
     header: {
@@ -113,7 +141,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         color: "black",
-        marginTop: 20,
+        marginTop: 20
     },
 
     input: {
@@ -123,7 +151,16 @@ const styles = StyleSheet.create({
         padding: 10,
         alignSelf: "stretch",
         borderColor: colorScheme.dark,
-        color: "black",
+        color: "black"
+    },
+
+    dateButton: {
+        marginTop: 25,
+        paddingVertical: 5,
+        borderColor: colorScheme.dark,
+        backgroundColor: colorScheme.backgroundPage,
+        borderRadius: 0,
+        alignItems: "left"
     },
 
     findFlightButton: {
@@ -132,5 +169,5 @@ const styles = StyleSheet.create({
         width: 200,
         backgroundColor: colorScheme.primary,
         borderRadius: 30
-    },
+    }
 });
