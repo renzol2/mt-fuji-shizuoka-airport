@@ -8,7 +8,7 @@ import { FLIGHTS } from "../data/flight";
 import { colorScheme } from "../Styles";
 
 export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
-    const [searchQuery, setSearchQuery] = React.useState(null);
+    const [searchQuery, setSearchQuery] = React.useState('');
     /** Function to pin flight given its flight number */
     const pinFlight = (
         isPinned,
