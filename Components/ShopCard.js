@@ -1,6 +1,16 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Colors, IconButton, Surface, Text, Dialog, Portal, Paragraph, Button, Snackbar } from "react-native-paper";
+import {
+    Colors,
+    IconButton,
+    Surface,
+    Text,
+    Dialog,
+    Portal,
+    Paragraph,
+    Button,
+    Snackbar,
+} from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
@@ -51,7 +61,7 @@ export default function ShopCard({
         setVisible(!visible);
         hideCrowdsourceUpdate();
         hideCrowdsourcePrompt();
-    }
+    };
     const onDismissSnackBar = () => setVisible(false);
 
     const [mydate, setCurrentDate] = React.useState(new Date());
@@ -181,9 +191,7 @@ export default function ShopCard({
                             </Button>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={onToggleSnackBar}>
-                                Confirm
-                            </Button>
+                            <Button onPress={onToggleSnackBar}>Confirm</Button>
                             <Button onPress={hideCrowdsourceUpdate}>
                                 Cancel
                             </Button>
@@ -208,8 +216,11 @@ export default function ShopCard({
                     </Dialog>
                     <Snackbar
                         visible={visible}
-                        onDismiss={onDismissSnackBar}>
-                        Updated hours have been submitted.
+                        onDismiss={onDismissSnackBar}
+                    >
+                        Updated hours have been submitted. We'll change the
+                        hours once enough people have submitted the same
+                        information.
                     </Snackbar>
                 </Portal>
             </View>
@@ -228,17 +239,17 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginLeft: 10,
         marginRight: 10,
-        borderRadius: 30
+        borderRadius: 30,
     },
     shopName: {
         fontSize: 23,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
     },
     shopHours: {
         fontSize: 18,
         fontWeight: "200",
-        color: 'white'
+        color: "white",
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -246,6 +257,6 @@ const styles = StyleSheet.create({
     shopGate: {
         fontSize: 19,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
     },
 });
