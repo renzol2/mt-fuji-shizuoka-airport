@@ -1,13 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Button, Colors, DataTable } from "react-native-paper";
+import { Button, Colors, DataTable, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppBar from "../Components/AppBar";
 import { FLIGHTS } from "../data/flight";
 import { colorScheme } from "../Styles";
 
 export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
+    const [searchQuery, setSearchQuery] = React.useState(null);
     /** Function to pin flight given its flight number */
     const pinFlight = (
         isPinned,
@@ -43,7 +44,13 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
             <AppBar useBackButton />
             <ScrollView>
                 <Text style={styles.header}>Flight Schedule</Text>
-
+                <TextInput
+                    style={styles.input}
+                    value={searchQuery}
+                    onChangeText={(text) => setSearchQuery(text)}
+                    placeholder="Search for flights"
+                    placeholderTextColor="grey"
+                />
                 <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator
@@ -51,15 +58,40 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                     <DataTable style={styles.flightSchedule}>
                         <DataTable.Header>
                             <DataTable.Title>Number</DataTable.Title>
+                            <DataTable.Title>Pin</DataTable.Title>
                             <DataTable.Title>Airline</DataTable.Title>
                             <DataTable.Title>Departure</DataTable.Title>
                             <DataTable.Title>Arrival</DataTable.Title>
                             <DataTable.Title>Date</DataTable.Title>
                             <DataTable.Title>Time</DataTable.Title>
                             <DataTable.Title>Gate</DataTable.Title>
-                            <DataTable.Title>Pin</DataTable.Title>
                         </DataTable.Header>
-                        {FLIGHTS.map(
+                        {FLIGHTS.filter(
+                            (flight) =>
+                                flight.departure
+                                    .toUpperCase()
+                                    .includes(
+                                        searchQuery.toUpperCase().trim()
+                                    ) ||
+                                flight.number
+                                    .toUpperCase()
+                                    .includes(
+                                        searchQuery.toUpperCase().trim()
+                                    ) ||
+                                flight.arrival
+                                    .toUpperCase()
+                                    .includes(
+                                        searchQuery.toUpperCase().trim()
+                                    ) ||
+                                flight.airline
+                                    .toUpperCase()
+                                    .includes(
+                                        searchQuery.toUpperCase().trim()
+                                    ) ||
+                                flight.date
+                                    .toDateString()
+                                    .includes(searchQuery.toUpperCase().trim())
+                        ).map(
                             (
                                 {
                                     number,
@@ -84,6 +116,35 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                             }
                                         >
                                             {number}
+                                        </DataTable.Cell>
+                                        <DataTable.Cell
+                                            style={
+                                                i % 2 === 0
+                                                    ? styles.flightSchedulePinCell
+                                                    : styles.flightSchedulePinCellAlternate
+                                            }
+                                        >
+                                            <Button
+                                                icon={
+                                                    isPinned
+                                                        ? "pin"
+                                                        : "pin-outline"
+                                                }
+                                                iconColor={Colors.purple100}
+                                                onPress={() =>
+                                                    pinFlight(
+                                                        isPinned,
+                                                        number,
+                                                        airline,
+                                                        departure,
+                                                        arrival,
+                                                        date,
+                                                        gate
+                                                    )
+                                                }
+                                            >
+                                                Pin
+                                            </Button>
                                         </DataTable.Cell>
                                         <DataTable.Cell
                                             style={
@@ -128,9 +189,23 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                                     : styles.flightScheduleCellAlternate
                                             }
                                         >
-                                            {`${(date.getHours() <= 12 ? date.getHours().toString().padStart(2, 0) : (date.getHours() - 12).toString().padStart(2, 0))}:${
-                                                date.getMinutes().toString().padStart(2, 0)} ${
-                                               (date.getHours() < 12 ? 'AM' : 'PM')}`}
+                                            {`${
+                                                date.getHours() <= 12
+                                                    ? date
+                                                          .getHours()
+                                                          .toString()
+                                                          .padStart(2, 0)
+                                                    : (date.getHours() - 12)
+                                                          .toString()
+                                                          .padStart(2, 0)
+                                            }:${date
+                                                .getMinutes()
+                                                .toString()
+                                                .padStart(2, 0)} ${
+                                                date.getHours() < 12
+                                                    ? "AM"
+                                                    : "PM"
+                                            }`}
                                         </DataTable.Cell>
                                         <DataTable.Cell
                                             style={
@@ -140,35 +215,6 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                             }
                                         >
                                             {gate}
-                                        </DataTable.Cell>
-                                        <DataTable.Cell
-                                            style={
-                                                i % 2 === 0
-                                                    ? styles.flightScheduleCell
-                                                    : styles.flightScheduleCellAlternate
-                                            }
-                                        >
-                                            <Button
-                                                icon={
-                                                    isPinned
-                                                        ? "pin"
-                                                        : "pin-outline"
-                                                }
-                                                iconColor={Colors.purple100}
-                                                onPress={() =>
-                                                    pinFlight(
-                                                        isPinned,
-                                                        number,
-                                                        airline,
-                                                        departure,
-                                                        arrival,
-                                                        date,
-                                                        gate
-                                                    )
-                                                }
-                                            >
-                                                Pin
-                                            </Button>
                                         </DataTable.Cell>
                                     </DataTable.Row>
                                 );
@@ -217,5 +263,23 @@ const styles = StyleSheet.create({
         minWidth: 150,
         padding: 5,
         backgroundColor: colorScheme.backgroundPage,
+    },
+    flightSchedulePinCell: {
+        minWidth: 150,
+        padding: 5,
+    },
+    flightSchedulePinCellAlternate: {
+        minWidth: 150,
+        padding: 5,
+        backgroundColor: colorScheme.backgroundPage,
+    },
+    input: {
+        height: 30,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        alignSelf: "stretch",
+        borderColor: colorScheme.dark,
+        color: "black",
     },
 });
