@@ -10,6 +10,7 @@ import {
     Paragraph,
     Button,
     Chip,
+    Snackbar,
 } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
@@ -39,6 +40,9 @@ export default function RestaurantCard({
     const [visible, setVisible] = React.useState(false);
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
+
+    const [showDescription, setShowDescription] = React.useState(false);
+
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
@@ -62,6 +66,13 @@ export default function RestaurantCard({
     const [timepicker, setTimepicker] = React.useState(false);
     const showTimepicker = () => setTimepicker(true);
     const hideTimepicker = () => setTimepicker(false);
+
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
+        hideCrowdsourceUpdate();
+        hideCrowdsourcePrompt();
+    };
+    const onDismissSnackBar = () => setVisible(false);
 
     const [mydate, setCurrentDate] = React.useState(new Date());
 
@@ -118,18 +129,19 @@ export default function RestaurantCard({
                 {/* Gate */}
                 <Text style={styles.restaurantGate}>{`Gate: ${gate}`}</Text>
 
-                {/* Description */}
+                {/* Description button */}
                 <Button
                     color="white"
                     style={styles.detailsButton}
-                    onPress={() => showDialog()}
+                    onPress={() => setShowDescription(true)}
                 >
                     Details
                 </Button>
+                {/* Description dialog */}
                 <Portal>
                     <Dialog
-                        visible={visible}
-                        onDismiss={hideDialog}
+                        visible={showDescription}
+                        onDismiss={() => setShowDescription(false)}
                         style={{ backgroundColor: colorScheme.backgroundPage }}
                     >
                         <Dialog.Title>{name}</Dialog.Title>
@@ -138,7 +150,7 @@ export default function RestaurantCard({
                         </Dialog.Content>
                         <Dialog.Actions>
                             <Button
-                                onPress={hideDialog}
+                                onPress={() => setShowDescription(false)}
                                 color={colorScheme.dark}
                             >
                                 Close
@@ -237,9 +249,7 @@ export default function RestaurantCard({
                             </Button>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideCrowdsourceUpdate}>
-                                Confirm
-                            </Button>
+                            <Button onPress={onToggleSnackBar}>Confirm</Button>
                             <Button onPress={hideCrowdsourceUpdate}>
                                 Cancel
                             </Button>
@@ -262,6 +272,14 @@ export default function RestaurantCard({
                             />
                         </Dialog.Content>
                     </Dialog>
+                    <Snackbar
+                        visible={visible}
+                        onDismiss={onDismissSnackBar}
+                    >
+                        Updated hours have been submitted. We'll change the
+                        hours once enough people have submitted the same
+                        information.
+                    </Snackbar>
                 </Portal>
             </View>
         </Surface>

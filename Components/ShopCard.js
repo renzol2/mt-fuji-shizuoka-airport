@@ -9,8 +9,9 @@ import {
     Portal,
     Paragraph,
     Button,
-    Chip,
+    Snackbar,
 } from "react-native-paper";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
@@ -36,13 +37,65 @@ export default function ShopCard({
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
-    const { day, openingTime, closingTime } = currentHours;
-    const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
+    const { day } = currentHours;
+    const [openingTime, setOpeningTime] = React.useState(
+        currentHours.openingTime
+    );
+    const [closingTime, setClosingTime] = React.useState(
+        currentHours.closingTime
+    );
+    const [changingOpeningTime, setChangingOpeningTime] = React.useState(true);
+
+    const [crowdsourcePrompt, setCrowdsourcePrompt] = React.useState(false);
+    const showCrowdsourcePrompt = () => setCrowdsourcePrompt(true);
+    const hideCrowdsourcePrompt = () => setCrowdsourcePrompt(false);
+
+    const [crowdsourceUpdate, setCrowdsourceUpdate] = React.useState(false);
+    const showCrowdsourceUpdate = () => setCrowdsourceUpdate(true);
+    const hideCrowdsourceUpdate = () => setCrowdsourceUpdate(false);
+
+    const [timepicker, setTimepicker] = React.useState(false);
+    const showTimepicker = () => setTimepicker(true);
+    const hideTimepicker = () => setTimepicker(false);
+
     const [visible, setVisible] = React.useState(false);
     const [showDescription, setShowDescription] = React.useState(false);
+    const onToggleSnackBar = () => {
+        setVisible(!visible);
+        hideCrowdsourceUpdate();
+        hideCrowdsourcePrompt();
+    };
+    const onDismissSnackBar = () => setVisible(false);
 
-    const showCrowdsourcePrompt = () => setVisible(true);
-    const hideCrowdsourcePrompt = () => setVisible(false);
+    const [mydate, setCurrentDate] = React.useState(new Date());
+
+    const changeSelectedDate = (event, selectedDate) => {
+        if (event.type === "set") {
+            const { nativeEvent } = event;
+            const newTime = new Date(nativeEvent.timestamp)
+                .toTimeString()
+                .substring(0, 8);
+            const hour = newTime.substring(0, 2);
+            const timeString =
+                (parseInt(hour) % 12).toString() +
+                newTime.substring(2, 5) +
+                (hour > 12 ? "pm" : "am");
+            if (changingOpeningTime) {
+                setOpeningTime(timeString);
+            } else {
+                setClosingTime(timeString);
+            }
+
+            const currentDate = selectedDate || mydate;
+            setCurrentDate(currentDate);
+            setTimepicker(false);
+        }
+    };
+    const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
+
+    const showDialog = () => setVisible(true);
+
+    const hideDialog = () => setVisible(false);
     return (
         <Surface
             style={styles.shopSurface}
@@ -55,12 +108,13 @@ export default function ShopCard({
 
                 {/* Hours */}
                 <Text style={styles.shopHours}>
-                    {`Hours (${day}): ${openingTime} - ${closingTime}`}
+                    {`Hours (${day}): ${currentHours.openingTime} - ${currentHours.closingTime}`}
                 </Text>
 
                 {/* Gate */}
                 <Text style={styles.shopGate}>{`Gate: ${gate}`}</Text>
 
+                {/* Description */}
                 <Button
                     color="white"
                     style={styles.detailsButton}
@@ -132,20 +186,78 @@ export default function ShopCard({
                     onPress={showCrowdsourcePrompt}
                 />
                 <Portal>
+                    {/* Crowdsource prompt dialog */}
                     <Dialog
-                        visible={visible}
+                        visible={crowdsourcePrompt}
                         onDismiss={hideCrowdsourcePrompt}
                     >
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
-                            <Paragraph>Shop</Paragraph>
+                            <Paragraph>Is this info correct?</Paragraph>
+                            <Paragraph>{`Current Hours: ${openingTime} - ${closingTime}`}</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideCrowdsourcePrompt}>
-                                Done
+                            <Button onPress={hideCrowdsourcePrompt}>Yes</Button>
+                            <Button onPress={showCrowdsourceUpdate}>No</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                    {/* Crowdsource update dialog */}
+                    <Dialog
+                        visible={crowdsourceUpdate}
+                        onDismiss={hideCrowdsourceUpdate}
+                    >
+                        <Dialog.Title>Hours</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>What are the correct hours?</Paragraph>
+                            <Button
+                                onPress={() => {
+                                    setChangingOpeningTime(true);
+                                    showTimepicker();
+                                }}
+                            >
+                                Open: {openingTime}
+                            </Button>
+                            <Button
+                                onPress={() => {
+                                    setChangingOpeningTime(false);
+                                    showTimepicker();
+                                }}
+                            >
+                                Close: {closingTime}
+                            </Button>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button onPress={onToggleSnackBar}>Confirm</Button>
+                            <Button onPress={hideCrowdsourceUpdate}>
+                                Cancel
                             </Button>
                         </Dialog.Actions>
                     </Dialog>
+                    {/* Timepicker dialog */}
+                    <Dialog
+                        visible={timepicker}
+                        onDismiss={hideTimepicker}
+                    >
+                        <Dialog.Title>Hours</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>What are the correct hours?</Paragraph>
+                            <DateTimePicker
+                                value={mydate}
+                                mode={"time"}
+                                is24Hour={false}
+                                display={true}
+                                onChange={changeSelectedDate}
+                            />
+                        </Dialog.Content>
+                    </Dialog>
+                    <Snackbar
+                        visible={visible}
+                        onDismiss={onDismissSnackBar}
+                    >
+                        Updated hours have been submitted. We'll change the
+                        hours once enough people have submitted the same
+                        information.
+                    </Snackbar>
                 </Portal>
             </View>
         </Surface>
