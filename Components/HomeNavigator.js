@@ -4,6 +4,7 @@ import AmenityResults from "../Screens/AmenityResults";
 import FlightSearch from "../Screens/FlightSearch";
 import FlightMatches from "../Screens/FlightMatches";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import FlightSchedule from "../Screens/FlightSchedule";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,18 @@ function HomeNavigator({
                 name="HomeScreen"
                 children={() => (
                     <HomeScreen
+                        pinnedFlight={pinnedFlight}
+                        setPinnedFlight={setPinnedFlight}
+                    />
+                )}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FlightSchedule"
+                children={() => (
+                    <FlightSchedule
                         pinnedFlight={pinnedFlight}
                         setPinnedFlight={setPinnedFlight}
                     />

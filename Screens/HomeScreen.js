@@ -79,7 +79,9 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                             icon="door-sliding"
                             style={styles.vStackItem}
                             labelStyle={styles.buttonText}
-                            onPress={() => navigation.navigate("")}
+                            onPress={() =>
+                                navigation.navigate("FlightSchedule")
+                            }
                         >
                             Flight Schedule
                         </Button>
@@ -129,141 +131,6 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                             )}
                         </Card.Content>
                     </Card>
-
-                    {/* Flight schedule */}
-                    {/* TODO: move this to a new screen */}
-                    <ScrollView
-                        horizontal
-                        showsHorizontalScrollIndicator
-                    >
-                        <DataTable style={styles.flightSchedule}>
-                            <DataTable.Header>
-                                <DataTable.Title>Number</DataTable.Title>
-                                <DataTable.Title>Airline</DataTable.Title>
-                                <DataTable.Title>Departure</DataTable.Title>
-                                <DataTable.Title>Arrival</DataTable.Title>
-                                <DataTable.Title>Date</DataTable.Title>
-                                <DataTable.Title>Time</DataTable.Title>
-                                <DataTable.Title>Gate</DataTable.Title>
-                                <DataTable.Title>Pin</DataTable.Title>
-                            </DataTable.Header>
-                            {FLIGHTS.map(
-                                (
-                                    {
-                                        number,
-                                        airline,
-                                        departure,
-                                        arrival,
-                                        date,
-                                        time,
-                                        gate,
-                                    },
-                                    i
-                                ) => {
-                                    const isPinned =
-                                        pinnedFlight !== undefined &&
-                                        pinnedFlight.number === number;
-                                    return (
-                                        <DataTable.Row key={number}>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleNumberCell
-                                                        : styles.flightScheduleNumberCellAlternate
-                                                }
-                                            >
-                                                {number}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {airline}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {departure}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {arrival}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {date}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {time}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                {gate}
-                                            </DataTable.Cell>
-                                            <DataTable.Cell
-                                                style={
-                                                    i % 2 === 0
-                                                        ? styles.flightScheduleCell
-                                                        : styles.flightScheduleCellAlternate
-                                                }
-                                            >
-                                                <Button
-                                                    icon={
-                                                        isPinned
-                                                            ? "pin"
-                                                            : "pin-outline"
-                                                    }
-                                                    iconColor={Colors.purple100}
-                                                    onPress={() =>
-                                                        pinFlight(
-                                                            isPinned,
-                                                            number,
-                                                            airline,
-                                                            departure,
-                                                            arrival,
-                                                            date,
-                                                            time,
-                                                            gate
-                                                        )
-                                                    }
-                                                >
-                                                    Pin
-                                                </Button>
-                                            </DataTable.Cell>
-                                        </DataTable.Row>
-                                    );
-                                }
-                            )}
-                        </DataTable>
-                    </ScrollView>
                 </ScrollView>
             </ImageBackground>
         </SafeAreaView>
@@ -314,7 +181,8 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: colorScheme.light,
-        height: 250,
+        height: 300,
+        marginBottom: 70,
     },
     cardBody: {
         fontSize: 20,
