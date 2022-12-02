@@ -41,7 +41,9 @@ export default function FlightCard({
                     style={styles.airport}
                 >{`${departure} to ${arrival}`}</Text>
                 <Text style={styles.date}>{`Departure Date: ${date.toDateString()}`}</Text>
-                <Text style={styles.time}>{`Departure Time: ${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)} ${(date.getHours < 12 ? 'AM' : 'PM')}`}</Text>
+                <Text style={styles.time}>{`Departure Time: ${(date.getHours() <= 12 ? date.getHours().toString().padStart(2, 0) : (date.getHours() - 12).toString().padStart(2, 0))}:${
+                                                              date.getMinutes().toString().padStart(2, 0)} ${
+                                                              (date.getHours() < 12 ? 'AM' : 'PM')}`}</Text>
                 <Text style={styles.gate}>{`Gate: ${gate}`}</Text>
             </View>
             {allowPinning && (

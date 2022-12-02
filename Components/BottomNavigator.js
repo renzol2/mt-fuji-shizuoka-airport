@@ -36,20 +36,6 @@ export default function BottomNavigator() {
                 }}
             />
             <Tab.Screen
-                name="Search"
-                component={SearchScreen}
-                options={{
-                    tabBarLabel: "Search",
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons
-                            name="magnify"
-                            color={color}
-                            size={26}
-                        />
-                    ),
-                }}
-            />
-            <Tab.Screen
                 name="Pins"
                 children={() => (
                     <PinsScreen
