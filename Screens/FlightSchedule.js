@@ -16,7 +16,6 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
         departure,
         arrival,
         date,
-        time,
         gate
     ) => {
         // If this flight is pinned, unpin it
@@ -34,7 +33,6 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                 departure,
                 arrival,
                 date,
-                time,
                 gate,
             });
         }
@@ -69,7 +67,6 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                     departure,
                                     arrival,
                                     date,
-                                    time,
                                     gate,
                                 },
                                 i
@@ -122,7 +119,7 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                                     : styles.flightScheduleCellAlternate
                                             }
                                         >
-                                            {date}
+                                            {date.toDateString()}
                                         </DataTable.Cell>
                                         <DataTable.Cell
                                             style={
@@ -131,7 +128,9 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                                     : styles.flightScheduleCellAlternate
                                             }
                                         >
-                                            {time}
+                                            {`${(date.getHours() <= 12 ? date.getHours().toString().padStart(2, 0) : (date.getHours() - 12).toString().padStart(2, 0))}:${
+                                                date.getMinutes().toString().padStart(2, 0)} ${
+                                               (date.getHours() < 12 ? 'AM' : 'PM')}`}
                                         </DataTable.Cell>
                                         <DataTable.Cell
                                             style={
@@ -164,7 +163,6 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                                         departure,
                                                         arrival,
                                                         date,
-                                                        time,
                                                         gate
                                                     )
                                                 }
