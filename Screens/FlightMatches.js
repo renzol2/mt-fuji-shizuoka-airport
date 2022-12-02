@@ -28,9 +28,9 @@ export default function FlightMatches({
     if (number === undefined || number === "") {
         flights = FLIGHTS.filter(
             (flight) =>
-                flight.departure == departure.toUpperCase().trim() &&
-                flight.arrival == arrival.toUpperCase().trim() &&
-                flight.date.toDateString() == date
+                flight.departure === departure.toUpperCase().trim() &&
+                flight.arrival === arrival.toUpperCase().trim() &&
+                flight.date.toDateString() === date
         );
         /** Find flights by flight number */
     } else {
