@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Snackbar } from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import { colorScheme } from "../Styles";
 import GatePicker from "../Components/GatePicker";
@@ -16,6 +16,7 @@ import { UNSELECTED_GATE_NAME } from "../data/gates";
  * them to the AmenityResults screen with the chosen filters.
  */
 export default function AmenityFinder() {
+    const [showSnackbar, setShowSnackbar] = React.useState(false);
     const [gateName, setGateName] = React.useState(UNSELECTED_GATE_NAME);
     const navigation = useNavigation();
 
@@ -33,7 +34,11 @@ export default function AmenityFinder() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ImageBackground style={styles.imageBackround} source={require("../images/airportgate.jpg")} resizeMode="cover">
+            <ImageBackground
+                style={styles.imageBackround}
+                source={require("../images/airportgate.jpg")}
+                resizeMode="cover"
+            >
                 <StatusBar />
                 <AppBar />
 
@@ -42,29 +47,39 @@ export default function AmenityFinder() {
                     gateName={gateName}
                     setGateName={setGateName}
                     isUnselected={gateName === UNSELECTED_GATE_NAME}
+                    showSnackbar={showSnackbar}
+                    setShowSnackbar={setShowSnackbar}
                 />
 
                 {/* List of all amenity type buttons */}
                 <View style={styles.amenityTypeButtonContainer}>
-                    {AMENITY_TYPE_BUTTONS.map(({ type, buttonTitle, disabled }) => (
-                        <Button
-                            style={styles.amenityTypeButton}
-                            mode="contained"
-                            disabled={disabled}
-                            onPress={() => {
-                                navigation.navigate("AmenityResults", {
-                                    gateName: gateName,
-                                    amenityType: type,
-                                });
-                            }}
-                            key={type}
-                        >
-                            {buttonTitle}
-                        </Button>
-                    ))}
+                    {AMENITY_TYPE_BUTTONS.map(
+                        ({ type, buttonTitle, disabled }) => (
+                            <Button
+                                style={styles.amenityTypeButton}
+                                mode="contained"
+                                disabled={disabled}
+                                onPress={() => {
+                                    navigation.navigate("AmenityResults", {
+                                        gateName: gateName,
+                                        amenityType: type,
+                                    });
+                                }}
+                                key={type}
+                            >
+                                {buttonTitle}
+                            </Button>
+                        )
+                    )}
                 </View>
-            </ImageBackground>
 
+                <Snackbar
+                    visible={showSnackbar}
+                    onDismiss={() => setShowSnackbar(false)}
+                >
+                    Gate selection is now gate {gateName}
+                </Snackbar>
+            </ImageBackground>
         </SafeAreaView>
     );
 }
@@ -75,7 +90,7 @@ const styles = StyleSheet.create({
         flex: 1, // makes component take up all available space (https://reactnative.dev/docs/flexbox)
     },
     imageBackround: {
-        flex: 1
+        flex: 1,
     },
 
     amenityTypeButtonContainer: {
@@ -86,7 +101,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         paddingVertical: 5,
         backgroundColor: colorScheme.primary,
-        borderRadius: 30
+        borderRadius: 30,
     },
 
     selectedAmenityButton: {
