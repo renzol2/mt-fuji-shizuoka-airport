@@ -17,12 +17,13 @@ function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
             .flatMap((s) => s);
         return (
             <View>
-                {shopsArray.map(({ name, hours, gate }) => (
+                {shopsArray.map(({ name, hours, gate, description }) => (
                     <ShopCard
                         key={name}
                         name={name}
                         hours={hours}
                         gate={gate}
+                        description={description}
                         pinnedAmenities={pinnedAmenities}
                         setPinnedAmenities={setPinnedAmenities}
                     />
@@ -36,12 +37,13 @@ function ShopsList({ gate, pinnedAmenities, setPinnedAmenities }) {
                 {SHOPS[gate].length === 0 && (
                     <Text style={styles.bodyText}>No shops at {gate}.</Text>
                 )}
-                {SHOPS[gate].map(({ name, hours, gate }) => (
+                {SHOPS[gate].map(({ name, hours, gate, description }) => (
                     <ShopCard
                         key={name}
                         name={name}
                         hours={hours}
                         gate={gate}
+                        description={description}
                         pinnedAmenities={pinnedAmenities}
                         setPinnedAmenities={setPinnedAmenities}
                     />

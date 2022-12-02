@@ -1,6 +1,16 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Colors, IconButton, Surface, Text, Dialog, Portal, Paragraph, Button } from "react-native-paper";
+import {
+    Colors,
+    IconButton,
+    Surface,
+    Text,
+    Dialog,
+    Portal,
+    Paragraph,
+    Button,
+    Chip,
+} from "react-native-paper";
 import { AMENITY_TYPES } from "../data/amenityTypes";
 import { colorScheme } from "../Styles";
 
@@ -10,6 +20,7 @@ import { colorScheme } from "../Styles";
  *  name: string,
  *  hours: Array<import("../data/shops").Hours>,
  *  gate: string,
+ *  description: string,
  *  pinnedAmenities: Array,
  *  setPinnedAmenities: React.SetStateAction
  * }}
@@ -18,6 +29,7 @@ export default function ShopCard({
     name,
     hours,
     gate,
+    description,
     pinnedAmenities,
     setPinnedAmenities,
 }) {
@@ -27,10 +39,10 @@ export default function ShopCard({
     const { day, openingTime, closingTime } = currentHours;
     const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
     const [visible, setVisible] = React.useState(false);
+    const [showDescription, setShowDescription] = React.useState(false);
 
-    const showDialog = () => setVisible(true);
-
-    const hideDialog = () => setVisible(false);
+    const showCrowdsourcePrompt = () => setVisible(true);
+    const hideCrowdsourcePrompt = () => setVisible(false);
     return (
         <Surface
             style={styles.shopSurface}
@@ -48,6 +60,35 @@ export default function ShopCard({
 
                 {/* Gate */}
                 <Text style={styles.shopGate}>{`Gate: ${gate}`}</Text>
+
+                <Button
+                    color="white"
+                    style={styles.detailsButton}
+                    onPress={() => setShowDescription(true)}
+                >
+                    Details
+                </Button>
+
+                <Portal>
+                    <Dialog
+                        visible={showDescription}
+                        onDismiss={() => setShowDescription(false)}
+                        style={{ backgroundColor: colorScheme.backgroundPage }}
+                    >
+                        <Dialog.Title>{name}</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>{description}</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button
+                                onPress={() => setShowDescription(false)}
+                                color={colorScheme.dark}
+                            >
+                                Close
+                            </Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
             </View>
 
             {/* Buttons */}
@@ -88,19 +129,36 @@ export default function ShopCard({
                     icon="lightbulb"
                     iconColor={Colors.purple100}
                     size={BUTTON_SIZE}
-                    onPress={showDialog}
+                    onPress={showCrowdsourcePrompt}
                 />
                 <Portal>
-                    <Dialog visible={visible} onDismiss={hideDialog}>
+                    <Dialog
+                        visible={visible}
+                        onDismiss={hideCrowdsourcePrompt}
+                    >
                         <Dialog.Title>Hours</Dialog.Title>
                         <Dialog.Content>
                             <Paragraph>Shop</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideDialog}>Done</Button>
+                            <Button onPress={hideCrowdsourcePrompt}>
+                                Done
+                            </Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
+
+                <Chip
+                    mode="flat"
+                    selectedColor={colorScheme.dark}
+                    style={{
+                        width: 100,
+                        alignSelf: "flex-start",
+                        marginVertical: 10,
+                    }}
+                >
+                    Shopping
+                </Chip>
             </View>
         </Surface>
     );
@@ -117,17 +175,17 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginLeft: 10,
         marginRight: 10,
-        borderRadius: 30
+        borderRadius: 30,
     },
     shopName: {
         fontSize: 23,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
     },
     shopHours: {
         fontSize: 18,
         fontWeight: "200",
-        color: 'white'
+        color: "white",
     },
     pinButton: {
         alignSelf: "flex-end",
@@ -135,6 +193,10 @@ const styles = StyleSheet.create({
     shopGate: {
         fontSize: 19,
         fontWeight: "bold",
-        color: 'white'
+        color: "white",
+    },
+    detailsButton: {
+        alignSelf: "flex-start",
+        marginLeft: -16,
     },
 });

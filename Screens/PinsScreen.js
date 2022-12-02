@@ -72,6 +72,7 @@ export default function PinsScreen({ pinnedAmenities, setPinnedAmenities }) {
                                     name={name}
                                     hours={amenityData.hours}
                                     gate={gate}
+                                    description={amenityData.description}
                                     pinnedAmenities={pinnedAmenities}
                                     setPinnedAmenities={setPinnedAmenities}
                                     key={name}

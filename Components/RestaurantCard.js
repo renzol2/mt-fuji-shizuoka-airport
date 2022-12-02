@@ -9,6 +9,7 @@ import {
     Portal,
     Paragraph,
     Button,
+    Chip,
 } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AMENITY_TYPES } from "../data/amenityTypes";
@@ -36,9 +37,7 @@ export default function RestaurantCard({
     setPinnedAmenities,
 }) {
     const [visible, setVisible] = React.useState(false);
-
     const showDialog = () => setVisible(true);
-
     const hideDialog = () => setVisible(false);
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
@@ -138,7 +137,12 @@ export default function RestaurantCard({
                             <Paragraph>{description}</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={hideDialog} color={colorScheme.dark}>Close</Button>
+                            <Button
+                                onPress={hideDialog}
+                                color={colorScheme.dark}
+                            >
+                                Close
+                            </Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
@@ -259,6 +263,18 @@ export default function RestaurantCard({
                         </Dialog.Content>
                     </Dialog>
                 </Portal>
+
+                <Chip
+                    mode="flat"
+                    selectedColor={colorScheme.dark}
+                    style={{
+                        width: 70,
+                        alignSelf: "flex-start",
+                        marginVertical: 10,
+                    }}
+                >
+                    Dining
+                </Chip>
             </View>
         </Surface>
     );
