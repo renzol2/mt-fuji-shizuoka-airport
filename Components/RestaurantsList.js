@@ -18,13 +18,14 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
 
             <View>
 
-                {restaurantsArray.map(({ name, hours, priceRange, gate }) => (
+                {restaurantsArray.map(({ name, hours, priceRange, gate, description }) => (
                     <RestaurantCard
                         key={name}
                         name={name}
                         hours={hours}
                         priceRange={priceRange}
                         gate={gate}
+                        description={description}
                         pinnedAmenities={pinnedAmenities}
                         setPinnedAmenities={setPinnedAmenities}
                     />
@@ -39,13 +40,14 @@ function RestaurantsList({ gate, pinnedAmenities, setPinnedAmenities }) {
                 {RESTAURANTS[gate].length === 0 && (
                     <Text style={styles.bodyText}>No restaurants at {gate}.</Text>
                 )}
-                {RESTAURANTS[gate].map(({ name, hours, priceRange, gate }) => (
+                {RESTAURANTS[gate].map(({ name, hours, priceRange, gate, description }) => (
                     <RestaurantCard
                         key={name}
                         name={name}
                         hours={hours}
                         priceRange={priceRange}
                         gate={gate}
+                        description={description}
                         pinnedAmenities={pinnedAmenities}
                         setPinnedAmenities={setPinnedAmenities}
                     />

@@ -11,6 +11,7 @@
  * @property {Array<Hours>} hours
  * @property {string} priceRange
  * @property {string} gate
+ * @property {string} description
  */
 
 /** @type {Restaurant} */
@@ -26,7 +27,9 @@ const GOOSE_ISLAND_RESTAURANT = {
         { day: "Sunday", openingTime: "6am", closingTime: "9pm" },
     ],
     priceRange: "$$",
-    gate: "B1"
+    gate: "B1",
+    description:
+        "Chicago's very own Goose Island Brewing Company brews its own beer and root beer right here in the City. Come sample their home-brewed favorites here at O'Hare where a full service bar awaits you. Paninis, salads and sandwiches available.",
 };
 
 /** @type {Restaurant} */
@@ -46,7 +49,9 @@ const LA_TAPENADE_MEDITERRANEAN_CAFE_RESTAURANT = {
         { day: "Sunday", openingTime: "5:30am", closingTime: "9pm" },
     ],
     priceRange: "$$$",
-    gate: "B4"
+    gate: "B4",
+    description:
+        "La Tapenade exudes the warmth and abundance of the coastal culture with its irresistible display of pastries, breads, gourmet sandwiches and pizzas. Fresh herbs, fine cheeses, specialty grilled meats and fire-roasted vegetables are used throughout the entire menu. Hand-made Mediterranean flatbreads are all baked fresh each day.",
 };
 
 /** @type {Restaurant} */
@@ -62,7 +67,9 @@ const STARBUCKS_A = {
         { day: "Sunday", openingTime: "5am", closingTime: "9pm" },
     ],
     priceRange: "$$",
-    gate: "B5"
+    gate: "B5",
+    description:
+        "It happens millions of times each week a customer receives a drink from a Starbucks barista, but each interaction is unique. It's just a moment in time, just one hand reaching over the counter to present a cup to another outstretched hand. But it's a connection.",
 };
 
 /** @type {Restaurant} */
@@ -78,7 +85,9 @@ const SMOOTHIE_KING_THE_GROVE = {
         { day: "Sunday", openingTime: "7am", closingTime: "9pm" },
     ],
     priceRange: "$",
-    gate: "B6"
+    gate: "B6",
+    description:
+        "The Grove delivers high quality snacks, that are superior in taste and are good for you! The Grove seeks the best avalable ingredients in the marketplace in order to provide deliciously different snack offerings to on the go airport travelers.",
 };
 
 /** @type {Restaurant} */
@@ -94,7 +103,9 @@ const GARRETT_POPCORN_SHOPS = {
         { day: "Sunday", openingTime: "7am", closingTime: "8pm" },
     ],
     priceRange: "$",
-    gate: "B7"
+    gate: "B7",
+    description:
+        "Every batch of our gourmet popcorn is handmade daily using the highest quality ingredients. It's no wonder Garrett Popcorn Shops has been a Chicago Tradition Since 1949.",
 };
 
 /** @type {Restaurant} */
@@ -110,7 +121,9 @@ const JAMBA_JUICE = {
         { day: "Sunday", openingTime: "7am", closingTime: "9pm" },
     ],
     priceRange: "$",
-    gate: "B7"
+    gate: "B7",
+    description:
+        "Jamba Juice is the category-defining leader in healthy blended beverages, juices, and good-for-you snacks.",
 };
 
 /** @type {Restaurant} */
@@ -127,6 +140,8 @@ const WOLFGANG_EXPRESS = {
     ],
     priceRange: "$",
     gate: "B7",
+    description:
+        "Critically acclaimed chef Wolfgang Puck brings fine dining to O'Hare International Airport. The eclectic interior design and savory dishes are a treat for the eyes and palette. Full Bar available.",
 };
 
 /** @type {Restaurant} */
@@ -143,6 +158,8 @@ const ELIS_CHEESECAKE = {
     ],
     priceRange: "$",
     gate: "B9",
+    description:
+        "Created in the kitchen of Eli's restaurant, where superstars like Frank Sinatra, Sean Connery, and Liza Minelli came to dine, Eli's cheesecake has become a Chicago tradition and one of the best-selling cheesecakes in America. You can buy one slice, or take home an entire cheesecake.",
 };
 
 /** @type {Restaurant} */
@@ -159,6 +176,8 @@ const STARBUCKS_B = {
     ],
     priceRange: "$",
     gate: "B9",
+    description:
+        "It happens millions of times each week a customer receives a drink from a Starbucks barista, but each interaction is unique. It's just a moment in time, just one hand reaching over the counter to present a cup to another outstretched hand. But it's a connection.",
 };
 
 /**
