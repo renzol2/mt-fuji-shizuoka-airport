@@ -9,20 +9,56 @@ import {
     StyleSheet,
     ImageBackground,
 } from "react-native";
-import { Button, Card, Colors, IconButton } from "react-native-paper";
+import {
+    Button,
+    Card,
+    Colors,
+    DataTable,
+    IconButton,
+} from "react-native-paper";
 import AppBar from "../Components/AppBar";
 import FlightCard from "../Components/FlightCard";
-import { flights } from "../data/flight";
+import { FLIGHTS } from "../data/flight";
 import { colorScheme } from "../Styles";
-import AmenityFinder from "./AmenityFinder";
-import AmenityResults from "./AmenityResults";
-import FlightSearch from "./FlightSearch";
+
 /**
  * Home screen first shown
- * @param {{ pinnedFlight: import('../data/flight').Flight | undefined }}
+ * @param {{ pinnedFlight: import('../data/flight').Flight | undefined, setPinnedFlight: React.SetStateAction}}
  */
-function HomeScreen({ pinnedFlight }) {
+function HomeScreen({ pinnedFlight, setPinnedFlight }) {
     const navigation = useNavigation();
+
+    /** Function to pin flight given its flight number */
+    const pinFlight = (
+        isPinned,
+        number,
+        airline,
+        departure,
+        arrival,
+        date,
+        time,
+        gate
+    ) => {
+        // If this flight is pinned, unpin it
+        if (isPinned) {
+            setPinnedFlight(undefined);
+        } else if (
+            // If there's no pinned flight, or the current pinned flight is
+            // not this flight, then pin this flight
+            pinnedFlight === undefined ||
+            (pinnedFlight !== undefined && !isPinned)
+        ) {
+            setPinnedFlight({
+                number,
+                airline,
+                departure,
+                arrival,
+                date,
+                time,
+                gate,
+            });
+        }
+    };
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
@@ -43,7 +79,9 @@ function HomeScreen({ pinnedFlight }) {
                             icon="door-sliding"
                             style={styles.vStackItem}
                             labelStyle={styles.buttonText}
-                            onPress={() => navigation.navigate("")}
+                            onPress={() =>
+                                navigation.navigate("FlightSchedule")
+                            }
                         >
                             Flight Schedule
                         </Button>
@@ -68,6 +106,7 @@ function HomeScreen({ pinnedFlight }) {
                     </View>
 
                     {/* Pinned flight card */}
+                    {/* FIXME: MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITATIONS IN A CARD */}
                     <Card style={styles.card}>
                         <Card.Title
                             style={{ fontSize: 30 }}
@@ -142,7 +181,8 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: colorScheme.light,
-        height: 250,
+        height: 300,
+        marginBottom: 70,
     },
     cardBody: {
         fontSize: 20,
@@ -150,6 +190,30 @@ const styles = StyleSheet.create({
     cardBodyRight: {
         alignContent: "flex-end",
         fontSize: 25,
+    },
+    flightSchedule: {
+        minWidth: 1000,
+        textAlign: "center",
+        backgroundColor: colorScheme.light,
+        marginBottom: 60,
+    },
+    flightScheduleCell: {
+        minWidth: 150,
+        // padding: 5,
+    },
+    flightScheduleCellAlternate: {
+        minWidth: 150,
+        // padding: 5,
+        backgroundColor: colorScheme.backgroundPage,
+    },
+    flightScheduleNumberCell: {
+        minWidth: 150,
+        padding: 5,
+    },
+    flightScheduleNumberCellAlternate: {
+        minWidth: 150,
+        padding: 5,
+        backgroundColor: colorScheme.backgroundPage,
     },
 });
 

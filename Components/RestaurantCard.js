@@ -9,6 +9,7 @@ import {
     Portal,
     Paragraph,
     Button,
+    Chip,
     Snackbar,
 } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -22,6 +23,7 @@ import { colorScheme } from "../Styles";
  *  hours: Array<import("../data/restaurants").Hours>,
  *  priceRange: string,
  *  gate: string,
+ *  description: string,
  *  pinnedAmenities: Array,
  *  setPinnedAmenities: React.SetStateAction
  * }}
@@ -31,9 +33,16 @@ export default function RestaurantCard({
     hours,
     priceRange,
     gate,
+    description,
     pinnedAmenities,
     setPinnedAmenities,
 }) {
+    const [visible, setVisible] = React.useState(false);
+    const showDialog = () => setVisible(true);
+    const hideDialog = () => setVisible(false);
+
+    const [showDescription, setShowDescription] = React.useState(false);
+
     const BUTTON_SIZE = 24;
     const currentDayIndex = (new Date().getDay() + 6) % 7;
     const currentHours = hours[currentDayIndex];
@@ -58,7 +67,6 @@ export default function RestaurantCard({
     const showTimepicker = () => setTimepicker(true);
     const hideTimepicker = () => setTimepicker(false);
 
-    const [visible, setVisible] = React.useState(false);
     const onToggleSnackBar = () => {
         setVisible(!visible);
         hideCrowdsourceUpdate();
@@ -120,6 +128,37 @@ export default function RestaurantCard({
 
                 {/* Gate */}
                 <Text style={styles.restaurantGate}>{`Gate: ${gate}`}</Text>
+
+                {/* Description button */}
+                <Button
+                    color="white"
+                    style={styles.detailsButton}
+                    onPress={() => setShowDescription(true)}
+                >
+                    Details
+                </Button>
+                {/* Description dialog */}
+                <Portal>
+                    <Dialog
+                        visible={showDescription}
+                        onDismiss={() => setShowDescription(false)}
+                        style={{ backgroundColor: colorScheme.backgroundPage }}
+                    >
+                        <Dialog.Title>{name}</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>{description}</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button
+                                onPress={() => setShowDescription(false)}
+                                color={colorScheme.dark}
+                            >
+                                Close
+                            </Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
+                {/* <Text style={styles.restaurantDescription}>{description}</Text> */}
             </View>
 
             {/* Buttons */}
@@ -281,5 +320,13 @@ const styles = StyleSheet.create({
         fontSize: 19,
         fontWeight: "bold",
         color: "white",
+    },
+    restaurantDescription: {
+        fontSize: 17,
+        color: "white",
+    },
+    detailsButton: {
+        alignSelf: "flex-start",
+        marginLeft: -16,
     },
 });

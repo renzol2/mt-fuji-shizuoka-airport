@@ -94,4 +94,22 @@ export const FLIGHTS = [
         time: "12:50",
         gate: "B3",
     },
+    {
+        number: "UA1567",
+        airline: "United Airlines",
+        departure: "ORD",
+        arrival: "SEA",
+        date: "2022-12-30",
+        time: "12:50",
+        gate: "B3",
+    },
+    {
+        number: "UA1566",
+        airline: "United Airlines",
+        departure: "ORD",
+        arrival: "SEA",
+        date: "2022-12-30",
+        time: "12:50",
+        gate: "B3",
+    },
 ];

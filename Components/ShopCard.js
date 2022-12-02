@@ -21,6 +21,7 @@ import { colorScheme } from "../Styles";
  *  name: string,
  *  hours: Array<import("../data/shops").Hours>,
  *  gate: string,
+ *  description: string,
  *  pinnedAmenities: Array,
  *  setPinnedAmenities: React.SetStateAction
  * }}
@@ -29,6 +30,7 @@ export default function ShopCard({
     name,
     hours,
     gate,
+    description,
     pinnedAmenities,
     setPinnedAmenities,
 }) {
@@ -57,6 +59,7 @@ export default function ShopCard({
     const hideTimepicker = () => setTimepicker(false);
 
     const [visible, setVisible] = React.useState(false);
+    const [showDescription, setShowDescription] = React.useState(false);
     const onToggleSnackBar = () => {
         setVisible(!visible);
         hideCrowdsourceUpdate();
@@ -90,6 +93,9 @@ export default function ShopCard({
     };
     const isPinned = pinnedAmenities.some((amenity) => name === amenity.name);
 
+    const showDialog = () => setVisible(true);
+
+    const hideDialog = () => setVisible(false);
     return (
         <Surface
             style={styles.shopSurface}
@@ -107,6 +113,36 @@ export default function ShopCard({
 
                 {/* Gate */}
                 <Text style={styles.shopGate}>{`Gate: ${gate}`}</Text>
+
+                {/* Description */}
+                <Button
+                    color="white"
+                    style={styles.detailsButton}
+                    onPress={() => setShowDescription(true)}
+                >
+                    Details
+                </Button>
+
+                <Portal>
+                    <Dialog
+                        visible={showDescription}
+                        onDismiss={() => setShowDescription(false)}
+                        style={{ backgroundColor: colorScheme.backgroundPage }}
+                    >
+                        <Dialog.Title>{name}</Dialog.Title>
+                        <Dialog.Content>
+                            <Paragraph>{description}</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button
+                                onPress={() => setShowDescription(false)}
+                                color={colorScheme.dark}
+                            >
+                                Close
+                            </Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
             </View>
 
             {/* Buttons */}
@@ -258,5 +294,9 @@ const styles = StyleSheet.create({
         fontSize: 19,
         fontWeight: "bold",
         color: "white",
+    },
+    detailsButton: {
+        alignSelf: "flex-start",
+        marginLeft: -16,
     },
 });
