@@ -1,14 +1,20 @@
 import * as React from "react";
 import { View } from "react-native";
-import { Button, Menu, Provider } from "react-native-paper";
+import { Button, Menu, Provider, Snackbar } from "react-native-paper";
 import { GATES } from "../data/gates";
 import { colorScheme } from "../Styles";
 
 /**
  * Paper menu that allows user to select a gate
- * @param {{ gateName: string, setGateName: React.SetStateAction, isUnselected: boolean }}
+ * @param {{ gateName: string, setGateName: React.SetStateAction, isUnselected: boolean, showSnackbar: true, setShowSnackbar: React.SetStateAction }}
  */
-const GatePicker = ({ gateName, setGateName, isUnselected }) => {
+const GatePicker = ({
+    gateName,
+    setGateName,
+    isUnselected,
+    showSnackbar,
+    setShowSnackbar,
+}) => {
     const [visible, setVisible] = React.useState(false);
 
     const openMenu = () => setVisible(true);
@@ -27,11 +33,17 @@ const GatePicker = ({ gateName, setGateName, isUnselected }) => {
                 visible={visible}
                 onDismiss={closeMenu}
                 anchor={
-                    <Button style={{ backgroundColor: colorScheme.dark, borderRadius: 30 }}
+                    <Button
+                        style={{
+                            backgroundColor: colorScheme.dark,
+                            borderRadius: 30,
+                        }}
                         mode="contained"
                         onPress={openMenu}
                     >
-                        {isUnselected ? "Select a gate" : `Selected: ${gateName}`}
+                        {isUnselected
+                            ? "Select a gate"
+                            : `Selected: ${gateName}`}
                     </Button>
                 }
             >
@@ -39,6 +51,7 @@ const GatePicker = ({ gateName, setGateName, isUnselected }) => {
                     return (
                         <Menu.Item
                             onPress={() => {
+                                setShowSnackbar(true);
                                 setGateName(gate);
                                 closeMenu();
                             }}
