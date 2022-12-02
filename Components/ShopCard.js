@@ -147,18 +147,6 @@ export default function ShopCard({
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
-
-                <Chip
-                    mode="flat"
-                    selectedColor={colorScheme.dark}
-                    style={{
-                        width: 100,
-                        alignSelf: "flex-start",
-                        marginVertical: 10,
-                    }}
-                >
-                    Shopping
-                </Chip>
             </View>
         </Surface>
     );

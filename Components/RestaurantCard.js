@@ -263,18 +263,6 @@ export default function RestaurantCard({
                         </Dialog.Content>
                     </Dialog>
                 </Portal>
-
-                <Chip
-                    mode="flat"
-                    selectedColor={colorScheme.dark}
-                    style={{
-                        width: 70,
-                        alignSelf: "flex-start",
-                        marginVertical: 10,
-                    }}
-                >
-                    Dining
-                </Chip>
             </View>
         </Surface>
     );
