@@ -122,7 +122,7 @@ export default function FlightSchedule({ pinnedFlight, setPinnedFlight }) {
                                                     : styles.flightScheduleCellAlternate
                                             }
                                         >
-                                            {date}
+                                            {date.toDateString()}
                                         </DataTable.Cell>
                                         <DataTable.Cell
                                             style={

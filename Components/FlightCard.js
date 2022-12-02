@@ -9,7 +9,7 @@ import { colorScheme } from "../Styles";
  *  number: string,
  *  departure: string,
  *  arrival: string,
- *  date: string,
+ *  date: Date,
  *  time: string,
  *  gate: string
  *  allowPinning: boolean,

@@ -28,37 +28,6 @@ import { colorScheme } from "../Styles";
 function HomeScreen({ pinnedFlight, setPinnedFlight }) {
     const navigation = useNavigation();
 
-    /** Function to pin flight given its flight number */
-    const pinFlight = (
-        isPinned,
-        number,
-        airline,
-        departure,
-        arrival,
-        date,
-        time,
-        gate
-    ) => {
-        // If this flight is pinned, unpin it
-        if (isPinned) {
-            setPinnedFlight(undefined);
-        } else if (
-            // If there's no pinned flight, or the current pinned flight is
-            // not this flight, then pin this flight
-            pinnedFlight === undefined ||
-            (pinnedFlight !== undefined && !isPinned)
-        ) {
-            setPinnedFlight({
-                number,
-                airline,
-                departure,
-                arrival,
-                date,
-                time,
-                gate,
-            });
-        }
-    };
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
@@ -106,7 +75,6 @@ function HomeScreen({ pinnedFlight, setPinnedFlight }) {
                     </View>
 
                     {/* Pinned flight card */}
-                    {/* FIXME: MIGHT SWITCH THIS OUT OF BEING A CARD DUE TO FORMATTING LIMITATIONS IN A CARD */}
                     <Card style={styles.card}>
                         <Card.Title
                             style={{ fontSize: 30 }}
